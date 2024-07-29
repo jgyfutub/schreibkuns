@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import Header from "@/components/header";
 import {
   SignInButton,
   SignedIn,
@@ -23,20 +24,28 @@ export default function RootLayout({
   return (
     // <html lang="en">
     //   <body className={inter.className}>
-        <ClerkProvider>
-        <html lang='en'>
-      <body>
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-        {children}
-      </body>
-    </html>
-        </ClerkProvider>
+    //     <ClerkProvider>
+    //     <html lang='en'>
+    //   <body>
+    //     <SignedOut>
+    //       <SignInButton />
+    //     </SignedOut>
+    //     <SignedIn>
+    //       <UserButton />
+    //     </SignedIn>
+    //     {children}
+    //   </body>
+    // </html>
+    //     </ClerkProvider>
     // </body>
     // </html>
+    <html lang='en'>
+      <body className={inter.className}>
+        <ClerkProvider>
+          <Header />
+          {children}
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }
