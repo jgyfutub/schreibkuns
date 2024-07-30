@@ -1,3 +1,4 @@
+import FileUpload from '@/components/FileUploader';
 import { currentUser } from '@clerk/nextjs/server';
 import { auth } from '@clerk/nextjs/server';
 export default async function DashboardPage() {
@@ -23,6 +24,7 @@ export default async function DashboardPage() {
           {user.emailAddresses[0].emailAddress}
         </li>
       </ul>
+      <FileUpload/>
     </div>
   );
 }
