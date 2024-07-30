@@ -15,7 +15,7 @@ export async function uploadToS3(file:File){
         const file_key='uploads/'+Date.now().toString()+file.name.replace(" ",'-')
         const params={
             Bucket:"chatpdf-ved",
-            Key:file.name,
+            Key:file.name.split(".")[0]+Date.now().toString()+"."+file.name.split(".")[1],
             Body:file
         }
         const upload=s3.putObject(params).on('httpUploadProgress',evt=>{
@@ -27,6 +27,6 @@ export async function uploadToS3(file:File){
 
         return Promise.resolve({
             file_key,
-            file_name:file.name,
+            file_name:file.name.split(".")[0]+Date.now().toString()+"."+file.name.split(".")[1]
         })
 }

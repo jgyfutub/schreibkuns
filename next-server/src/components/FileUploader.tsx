@@ -4,11 +4,13 @@ import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from 'axios'
 import { toast } from "react-hot-toast";
+import { uploadToS3 } from "@/lib/s3";
 
 const FileUpload=()=>{
     const [upload,isupload]=useState(false)
     const {getRootProps,getInputProps}=useDropzone({
-        accept:{'application/pdf':[".pdf"]},
+        accept:{'image/jpeg': [],
+      'image/png': []},
         maxFiles:1,
         onDrop:async (acceptedFiles)=>{
             console.log(acceptedFiles)
@@ -20,17 +22,17 @@ const FileUpload=()=>{
             }else{
                 console.log("dd")
             }
-        //    try{
-        //     isupload(true)
-        //     const data=await uploadToS3(file)
-        //     if(!data?.file_key || !data.file_name){
-        //         alert("Something went wrong")
-        //     }
-        //    }catch(error){
-        //     console.log(error)
-        //    }finally{
-        //     isupload(false)
-        //    }
+           try{
+            isupload(true)
+            const data=await uploadToS3(file)
+            if(!data?.file_key || !data.file_name){
+                alert("Something went wrong")
+            }
+           }catch(error){
+            console.log(error)
+           }finally{
+            isupload(false)
+           }
         }
     })
     return (
