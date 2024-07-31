@@ -8,7 +8,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 
-load_dotenv('.env.local')
+load_dotenv('.env')
 
 def url_to_np_array(url):
     response = requests.get(url)
@@ -22,38 +22,36 @@ def url_to_np_array(url):
 app=Flask(__name__)
 CORS(app, supports_credentials=True)
 client=OpenAI(api_key=os.getenv('API_KEY'))
+print(client)
 
 @app.route('/upload_image_url', methods=['POST'])
 def upload_video():
     url=request.form['username']
-  #   response = client.chat.completions.create(
-  # model="gpt-4o-mini",
-  # messages=[
-  #   {
-  #     "role": "user",
-  #     "content": [
-  #       {
-  #         "type": "text",
-  #         "text": "What are in these images? Is there any difference between them?",
-  #       },
-  #       {
-  #         "type": "image_url",
-  #         "image_url": {
-  #           "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
-  #         },
-  #       },
-  #       {
-  #         "type": "image_url",
-  #         "image_url": {
-  #           "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
-  #         },
-  #       },
-  #     ],
-  #     }
-  #   ],
-  #   max_tokens=300,
-  # )
-  #   print(response.choices[0])
+#https://chatpdf-ved.s3.eu-north-1.amazonaws.com/desktop-wallpaper-war-flag-of-the-german-empire-german-empire1722359696535.jpg
+    imageurl="https://"+os.getenv('AWS_SECRET_BUCKET_NAME')+".s3."+os.getenv("NEXT_PUBLIC_AWS_REGION")+".amazonaws.com/"+url
+    print(imageurl)
+    response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {
+        "role": "user",
+        "content": [
+            {
+            "type": "text",
+            "text": "Explain the image in clarity.",
+            },
+            {
+            "type": "image_url",
+            "image_url": {
+                "url": imageurl,
+            },
+            },
+        ],
+        }
+        ],
+        max_tokens=100,
+    )
+    print(response.choices[0])
     return jsonify({"message":"done"})
     
 if __name__ == '__main__':
