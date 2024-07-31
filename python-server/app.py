@@ -5,6 +5,10 @@ import numpy as np
 from flask import Flask,request,jsonify
 from flask_cors import CORS
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv('.env.local')
 
 def url_to_np_array(url):
     response = requests.get(url)
@@ -17,11 +21,11 @@ def url_to_np_array(url):
 
 app=Flask(__name__)
 CORS(app, supports_credentials=True)
-# client=OpenAI()
+client=OpenAI(api_key=os.getenv('API_KEY'))
 
 @app.route('/upload_image_url', methods=['POST'])
 def upload_video():
-    url=request.form.get('email')
+    url=request.form['username']
   #   response = client.chat.completions.create(
   # model="gpt-4o-mini",
   # messages=[

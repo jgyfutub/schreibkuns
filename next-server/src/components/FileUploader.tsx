@@ -28,6 +28,18 @@ const FileUpload=()=>{
             if(!data?.file_key || !data.file_name){
                 alert("Something went wrong")
             }
+            const formData = new FormData();
+            formData.append('username',data.file_name);
+            try {
+                const response = await axios.post('http://127.0.0.1:5000/upload_image_url', formData, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data',
+                  },
+                });
+                console.log('Server response:', response.data);
+              } catch (error) {
+                console.error('Error submitting the form:', error);
+              }
            }catch(error){
             console.log(error)
            }finally{
