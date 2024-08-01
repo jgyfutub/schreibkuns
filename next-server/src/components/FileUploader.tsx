@@ -8,6 +8,7 @@ import { uploadToS3 } from "@/lib/s3";
 
 const FileUpload=()=>{
     const [upload,isupload]=useState(false)
+    const [result,setresult]=useState("")
     const {getRootProps,getInputProps}=useDropzone({
         accept:{'image/jpeg': [],
       'image/png': []},

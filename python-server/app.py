@@ -30,29 +30,29 @@ def upload_video():
 #https://chatpdf-ved.s3.eu-north-1.amazonaws.com/desktop-wallpaper-war-flag-of-the-german-empire-german-empire1722359696535.jpg
     imageurl="https://"+os.getenv('AWS_SECRET_BUCKET_NAME')+".s3."+os.getenv("NEXT_PUBLIC_AWS_REGION")+".amazonaws.com/"+url
     print(imageurl)
-    response = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[
-        {
-        "role": "user",
-        "content": [
-            {
-            "type": "text",
-            "text": "Explain the image in clarity.",
-            },
-            {
-            "type": "image_url",
-            "image_url": {
-                "url": imageurl,
-            },
-            },
-        ],
-        }
-        ],
-        max_tokens=100,
-    )
-    print(response.choices[0])
-    return jsonify({"message":"done"})
+    # response = client.chat.completions.create(
+    # model="gpt-4o-mini",
+    # messages=[
+    #     {
+    #     "role": "user",
+    #     "content": [
+    #         {
+    #         "type": "text",
+    #         "text": "Explain the image in clarity.",
+    #         },
+    #         {
+    #         "type": "image_url",
+    #         "image_url": {
+    #             "url": imageurl,
+    #         },
+    #         },
+    #     ],
+    #     }
+    #     ],
+    #     max_tokens=100,
+    # )
+    # print(response.choices[0])
+    return jsonify({"message":"done","response":"Explain the image in clarity"})
     
 if __name__ == '__main__':
     app.run(debug=True,port=5000)
