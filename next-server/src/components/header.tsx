@@ -6,6 +6,7 @@ export default async function Header() {
 //   const { userId } = auth();
 const { userId } : { userId: string | null } = auth();
 
+// this is a comment.
 
   return (
     <div className='bg-gray-600 text-neutral-100'>
