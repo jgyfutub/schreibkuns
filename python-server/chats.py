@@ -36,3 +36,18 @@ class Message(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
     # Relationships to the User and ChatRoom tables are defined by ForeignKey constraints
+
+class Message(db.Model):
+    id = db.Column(db.String(80), primary_key=True)
+    chat_id = db.Column(db.String(80), nullable=False)
+    user_id = db.Column(db.String(80), nullable=False)
+    sender_name = db.Column(db.String(120), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    role = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return f"<Message {self.id} from {self.sender_name}>"
+    
+with app.app_context():
+    db.create_all()
