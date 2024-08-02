@@ -1,7 +1,15 @@
-import FileUpload from '@/components/FileUploader';
+import ChatComponent from '@/components/Chats';
 import { currentUser } from '@clerk/nextjs/server';
 import { auth } from '@clerk/nextjs/server';
-import ChatComponent from '@/components/Chats';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
+const queryClient = new QueryClient()
+
 export default async function DashboardPage() {
   const { userId } = auth();
   const user = await currentUser();
@@ -11,6 +19,7 @@ export default async function DashboardPage() {
   }
 
   return (
+    <QueryClientProvider client={queryClient}>
     <div className='mt-10 text-start max-w-xl mx-auto bg-neutral-200 p-5 rounded'>
       <h1 className='text-4xl font-bold'>Welcome</h1>
       <ul className='list-none mt-10'>
@@ -25,10 +34,8 @@ export default async function DashboardPage() {
           {user.emailAddresses[0].emailAddress}
         </li>
       </ul>
-      <div>
-      <FileUpload/>
       <ChatComponent chatId={12345}/>
-      </div>
     </div>
+    </QueryClientProvider>
   );
 }

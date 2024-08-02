@@ -1,33 +1,35 @@
+// "use client"
 import React from "react";
 // import { Input } from "./ui/input";
 import { useChat } from "ai/react";
 // import { Button } from "./ui/button";
 import { Send } from "lucide-react";
-// import MessageList from "./MessageList";
-import { useQuery } from "@tanstack/react-query";
+import MessageList from "./MessageList";
 import { cn } from "@/lib/utils"
 import axios from "axios";
 import { Message } from "ai";
 
 type Props = { chatId: number };
 
-const ChatComponent = ({ chatId }: Props) => {
-  const { data, isLoading } = useQuery({
-    queryKey: ["chat", chatId],
-    queryFn: async () => {
-      const response = await axios.post<Message[]>("/api/get-messages", {
-        chatId,
-      });
-      return response.data;
-    },
-  });
-
+const ChatComponent = async({ chatId }: Props) => {
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ["chat", chatId],
+  //   queryFn: async () => {
+  //     const response = await axios.post<Message[]>("/http://127.0.0.1:5000/api/get-messages", {
+  //       chatId,
+  //     });
+  //     return response.data;
+  //   },
+  // });
+  // const response = await axios.post<Message[]>("/http://127.0.0.1:5000/api/get-messages", {
+  //         chatId,
+  //       });
   const { input, handleInputChange, handleSubmit, messages } = useChat({
     api: "/api/chat",
     body: {
       chatId,
     },
-    initialMessages: data || [],
+    initialMessages:  [],
   });
   React.useEffect(() => {
     const messageContainer = document.getElementById("message-container");
@@ -49,7 +51,7 @@ const ChatComponent = ({ chatId }: Props) => {
       </div>
 
       {/* message list */}
-      {/* <MessageList messages={messages} isLoading={isLoading} /> */}
+      {/* <MessageList messages={messages}  /> */}
 
       <form
         onSubmit={handleSubmit}

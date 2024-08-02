@@ -24,6 +24,29 @@ CORS(app, supports_credentials=True)
 client=OpenAI(api_key=os.getenv('API_KEY'))
 print(client)
 
+messages_db = {
+    12345: [
+        {"id": "msg1", "userId": "user1", "senderName": "Alice", "message": "Hello, how are you?", "timestamp": "2024-08-02T10:15:30Z","role":"user"},
+        {"id": "msg2", "userId": "user2", "senderName": "Bob", "message": "I'm good, thanks! How about you?", "timestamp": "2024-08-02T10:16:00Z","role":"assistant"},
+        {"id": "msg3", "userId": "user1", "senderName": "Alice", "message": "Doing well, just working on some projects.", "timestamp": "2024-08-02T10:17:15Z","role":"user"}
+    ]
+    # Add more chat data as needed
+}
+
+@app.route('/api/get-messages', methods=['POST'])
+def get_messages():
+    data = request.get_json()
+    chat_id = data.get('chatId')
+    
+    if chat_id is None:
+        return jsonify({"error": "chatId is required"}), 400
+    
+    # Retrieve messages for the given chatId
+    messages = messages_db.get(chat_id, [])
+
+    return jsonify(messages), 200
+
+
 @app.route('/upload_image_url', methods=['POST'])
 def upload_video():
     url=request.form['username']
