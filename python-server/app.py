@@ -26,9 +26,9 @@ print(client)
 
 messages_db = {
     12345: [
-        {"id": "msg1", "userId": "user1", "senderName": "Alice", "message": "Hello, how are you?", "timestamp": "2024-08-02T10:15:30Z","role":"user"},
-        {"id": "msg2", "userId": "user2", "senderName": "Bob", "message": "I'm good, thanks! How about you?", "timestamp": "2024-08-02T10:16:00Z","role":"assistant"},
-        {"id": "msg3", "userId": "user1", "senderName": "Alice", "message": "Doing well, just working on some projects.", "timestamp": "2024-08-02T10:17:15Z","role":"user"}
+        {"id": "msg1", "userId": "user1", "senderName": "Alice", "content": "Hello, how are you?", "timestamp": "2024-08-02T10:15:30Z","role":"user"},
+        {"id": "msg2", "userId": "user2", "senderName": "Bob", "content": "I'm good, thanks! How about you?", "timestamp": "2024-08-02T10:16:00Z","role":"assistant"},
+        {"id": "msg3", "userId": "user1", "senderName": "Alice", "content": "Doing well, just working on some projects.", "timestamp": "2024-08-02T10:17:15Z","role":"user"}
     ]
     # Add more chat data as needed
 }
