@@ -77,5 +77,11 @@ def upload_video():
     # print(response.choices[0])
     return jsonify({"message":"done","response":"Explain the image in clarity"})
     
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    print("hello",request.get_json())
+    data=request.get_json()
+    print(data)
+    return jsonify({"chat":"random text"})
 if __name__ == '__main__':
     app.run(debug=True,port=5000)
