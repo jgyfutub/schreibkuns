@@ -81,7 +81,7 @@ def upload_video():
 def chat():
     print("hello",request.get_json())
     data=request.get_json()
-    print(data)
+    # messages_db[12345].append({"id": "msg3", "userId": "user1", "senderName": "Alice", "content":data[12345][-1]['content'], "timestamp": "2024-08-02T10:17:15Z","role":"user"})
     return jsonify({"chat":"random text"})
 if __name__ == '__main__':
     app.run(debug=True,port=5000)
