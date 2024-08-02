@@ -37,14 +37,14 @@ messages_db = {
 def get_messages():
     data = request.get_json()
     chat_id = data.get('chatId')
-    
+    print(data,chat_id)
     if chat_id is None:
         return jsonify({"error": "chatId is required"}), 400
     
     # Retrieve messages for the given chatId
-    messages = messages_db.get(chat_id, [])
-
-    return jsonify(messages), 200
+    messages = messages_db[chat_id]
+    print(messages_db[chat_id])
+    return jsonify({"message":"done","chats":messages})
 
 
 @app.route('/upload_image_url', methods=['POST'])

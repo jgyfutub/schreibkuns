@@ -19,7 +19,6 @@ export default async function DashboardPage() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
     <div className='mt-10 text-start max-w-xl mx-auto bg-neutral-200 p-5 rounded'>
       <h1 className='text-4xl font-bold'>Welcome</h1>
       <ul className='list-none mt-10'>
@@ -36,6 +35,6 @@ export default async function DashboardPage() {
       </ul>
       <ChatComponent chatId={12345}/>
     </div>
-    </QueryClientProvider>
+
   );
 }
