@@ -7,9 +7,53 @@ from flask_cors import CORS
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+from bson.objectid import ObjectId
+import datetime
+import urllib.parse
+from pinecone.grpc import PineconeGRPC as Pinecone
+from pinecone import ServerlessSpec
+
 
 load_dotenv('.env')
-
+pc = Pinecone(api_key=os.getenv('PINECONE_KEY'))
+print(pc)
+index_name = "docs-quickstart-index"
+if index_name not in pc.list_indexes().names():
+    pc.create_index(
+        name=index_name,
+        dimension=2,
+        metric="cosine",
+        spec=ServerlessSpec(
+            cloud='aws', 
+            region='us-east-1'
+        ) 
+    ) 
+index = pc.Index(index_name)
+index.upsert(
+    vectors=[
+        {
+            "id": "vec1", 
+            "values": [0.1, 0.1], 
+            "metadata": {"genre": "drama"}
+        }, {
+            "id": "vec2", 
+            "values": [0.2, 0.2], 
+            "metadata": {"genre": "action"}
+        }, {
+            "id": "vec3", 
+            "values": [0.3, 0.3], 
+            "metadata": {"genre": "drama"}
+        }, {
+            "id": "vec4", 
+            "values": [0.4, 0.4,], 
+            "metadata": {"genre": "action"}
+        }
+    ],
+    namespace= "ns1"
+)
+print(index.describe_index_stats())
 def url_to_np_array(url):
     response = requests.get(url)
     response.raise_for_status()
@@ -83,5 +127,7 @@ def chat():
     data=request.get_json()
     # messages_db[12345].append({"id": "msg3", "userId": "user1", "senderName": "Alice", "content":data[12345][-1]['content'], "timestamp": "2024-08-02T10:17:15Z","role":"user"})
     return jsonify({"chat":"random text"})
+
+
 if __name__ == '__main__':
     app.run(debug=True,port=5000)
