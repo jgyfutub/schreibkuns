@@ -15,7 +15,7 @@ import urllib.parse
 from pinecone.grpc import PineconeGRPC as Pinecone
 from pinecone import ServerlessSpec
 import random
-
+import time
 
 load_dotenv('.env')
 pc = Pinecone(api_key=os.getenv('PINECONE_KEY'))
@@ -98,6 +98,7 @@ def get_messages():
         top_k=1000
     )['matches']:
         m.append(i['metadata'])
+    m=sorted(m, key=lambda x: x['timestamp'])
     print(m)
     return jsonify({"message":"done","chats":m})
 
@@ -143,12 +144,12 @@ def chat():
             {
             "id":str(random.randint(1000000000, 9999999999)),
             "values":[12345],
-            "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": "2024-08-02T10:17:15Z","role":"user"}
+            "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": int(time.time()),"role":"user"}
             },
             {
             "id":str(random.randint(1000000000, 9999999999)),
             "values":[12345],
-            "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": "2024-08-02T10:17:15Z","role":"assistant"}
+            "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": int(time.time())+10,"role":"assistant"}
             }
         ]
     )
