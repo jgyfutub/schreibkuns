@@ -14,6 +14,7 @@ import datetime
 import urllib.parse
 from pinecone.grpc import PineconeGRPC as Pinecone
 from pinecone import ServerlessSpec
+import random
 
 
 load_dotenv('.env')
@@ -87,8 +88,18 @@ def get_messages():
     
     # Retrieve messages for the given chatId
     messages = messages_db[chat_id]
-    print(messages_db[chat_id])
-    return jsonify({"message":"done","chats":messages})
+    # print(messages_db[chat_id])
+    m=[]
+    index1 = pc.Index("chatdatabase")
+    for i in index1.query(
+        vector=[chat_id],
+        # include_values=True,
+        include_metadata=True,
+        top_k=1000
+    )['matches']:
+        m.append(i['metadata'])
+    print(m)
+    return jsonify({"message":"done","chats":m})
 
 
 @app.route('/upload_image_url', methods=['POST'])
@@ -123,8 +134,24 @@ def upload_video():
     
 @app.route('/api/chat', methods=['POST'])
 def chat():
-    print("hello",request.get_json())
+    print("hello")
     data=request.get_json()
+    print(data['messages'][-1]['content'])
+    index1=pc.Index('chatdatabase')
+    index1.upsert(
+        vectors=[
+            {
+            "id":str(random.randint(1000000000, 9999999999)),
+            "values":[12345],
+            "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": "2024-08-02T10:17:15Z","role":"user"}
+            },
+            {
+            "id":str(random.randint(1000000000, 9999999999)),
+            "values":[12345],
+            "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": "2024-08-02T10:17:15Z","role":"assistant"}
+            }
+        ]
+    )
     # messages_db[12345].append({"id": "msg3", "userId": "user1", "senderName": "Alice", "content":data[12345][-1]['content'], "timestamp": "2024-08-02T10:17:15Z","role":"user"})
     return jsonify({"chat":"random text"})
 
@@ -132,7 +159,7 @@ def chat():
 def email_entry():
     index = pc.Index('chatpdf-yt')
     index.upsert(
-  vectors=[
+    vectors=[
     {
       "id": "A", 
       "values": [-1]*1536, 
