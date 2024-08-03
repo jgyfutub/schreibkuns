@@ -128,6 +128,16 @@ def chat():
     # messages_db[12345].append({"id": "msg3", "userId": "user1", "senderName": "Alice", "content":data[12345][-1]['content'], "timestamp": "2024-08-02T10:17:15Z","role":"user"})
     return jsonify({"chat":"random text"})
 
-
+@app.route('/email_entry', methods=['POST'])
+def email_entry():
+    index = pc.Index('chatpdf-yt')
+    index.upsert(
+  vectors=[
+    {
+      "id": "A", 
+      "values": [-1]*1536, 
+      "metadata": {"email":request.form['email']}
+    },])
+    return jsonify({"message":"done",})
 if __name__ == '__main__':
     app.run(debug=True,port=5000)
