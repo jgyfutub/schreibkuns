@@ -7,9 +7,6 @@ from flask_cors import CORS
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
-from bson.objectid import ObjectId
 import datetime
 import urllib.parse
 from pinecone.grpc import PineconeGRPC as Pinecone
@@ -159,6 +156,15 @@ def chat():
 @app.route('/email_entry', methods=['POST'])
 def email_entry():
     index = pc.Index('chatpdf-yt')
+    res=index.query(
+        id="A",
+        filter={
+        "email": request.form['email'],
+    },
+    top_k=1,
+    include_metadata=True,
+    include_values=True)
+    arr=res['matches'][0]['values']
     index.upsert(
     vectors=[
     {
@@ -166,6 +172,10 @@ def email_entry():
       "values": [-1]*1536, 
       "metadata": {"email":request.form['email']}
     },])
-    return jsonify({"message":"done",})
+    return jsonify({"message":"done","chatsid":arr[:10]})
+
+# @app.route('/email_res', methods=['GET'])
+# def email_entry():
+#     key1 = request.args.get('key1')
 if __name__ == '__main__':
     app.run(debug=True,port=5000)
