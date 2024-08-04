@@ -172,10 +172,22 @@ def email_entry():
       "values": [-1]*1536, 
       "metadata": {"email":request.form['email']}
     },])
-    return jsonify({"message":"done","chatsid":arr[:10]})
-
-# @app.route('/email_res', methods=['GET'])
-# def email_entry():
-#     key1 = request.args.get('key1')
+    return jsonify({"message":"done"})
+@app.route('/email_find', methods=['POST'])
+def email_find():
+    data = request.get_json()
+    print(data['email'],"sdfgh")
+    # chat_id = data.get('email')
+    index = pc.Index('chatpdf-yt')
+    res=index.query(
+        id="A",
+        filter={
+        "email": data['email'],
+    },
+    top_k=1,
+    include_metadata=True,
+    include_values=True)
+    arr=res['matches'][0]['values']
+    return jsonify({"array":arr})
 if __name__ == '__main__':
     app.run(debug=True,port=5000)

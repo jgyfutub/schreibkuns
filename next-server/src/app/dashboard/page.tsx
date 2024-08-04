@@ -27,7 +27,7 @@ export default async function DashboardPage() {
       </ul>
       <div>
       <FileUpload/>
-      <ChatComponent chatId={12345}/>
+      <ChatComponent chatId={12345} email={user.emailAddresses[0].emailAddress}/>
       </div>
     </div>
   );

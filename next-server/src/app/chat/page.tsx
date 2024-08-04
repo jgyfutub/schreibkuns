@@ -1,14 +1,6 @@
-import ChatComponent from '@/components/Chats';
+import ChatComp from '@/components/ChatFinder';
 import { currentUser } from '@clerk/nextjs/server';
 import { auth } from '@clerk/nextjs/server';
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query'
-const queryClient = new QueryClient()
 
 export default async function DashboardPage() {
   const { userId } = auth();
@@ -17,6 +9,7 @@ export default async function DashboardPage() {
   if (!userId || !user) {
     return <div>You are not logged in</div>;
   }
+
 
   return (
     <div className='mt-10 text-start max-w-xl mx-auto bg-neutral-200 p-5 rounded'>
@@ -33,7 +26,7 @@ export default async function DashboardPage() {
           {user.emailAddresses[0].emailAddress}
         </li>
       </ul>
-      <ChatComponent chatId={12345}/>
+      <ChatComp email={user.emailAddresses[0].emailAddress}/>
     </div>
 
   );

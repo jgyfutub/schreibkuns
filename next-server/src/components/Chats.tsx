@@ -10,9 +10,9 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Message } from "ai";
 
-type Props = { chatId: number };
+type Props = { chatId: number ;email:String};
 
-const ChatComponent = ({ chatId }: Props) => {
+const ChatComponent = ({ chatId ,email}: Props) => {
   const [data,setdata]=useState<Message[]>([])
   useEffect(() => {
     // Function to fetch messages
@@ -21,7 +21,11 @@ const ChatComponent = ({ chatId }: Props) => {
         const response = await axios.post('http://127.0.0.1:5000/api/get-messages', { chatId });
         const messages = response.data;
         console.log(messages);
-        setdata(messages.chats); // Assuming response.data has a structure like { chats: [...] }
+        setdata(messages.chats);
+        const response1 = await axios.post('http://127.0.0.1:5000/email_find', { email });
+        const messages1= response1.data;
+        console.log(messages1)
+        // setdata(messages.chats)
       } catch (error) {
         console.error('There was an error fetching the messages!', error);
       }
@@ -29,7 +33,7 @@ const ChatComponent = ({ chatId }: Props) => {
 
     // Call the function
     fetchMessages();
-  }, [chatId]); 
+  }, [chatId,email]); 
   const { input, handleInputChange, handleSubmit, messages } = useChat({
     api: "http://127.0.0.1:5000/api/chat",
     body: {
