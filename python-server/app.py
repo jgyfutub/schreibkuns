@@ -17,41 +17,6 @@ import time
 load_dotenv('.env')
 pc = Pinecone(api_key=os.getenv('PINECONE_KEY'))
 print(pc)
-index_name = "docs-quickstart-index"
-if index_name not in pc.list_indexes().names():
-    pc.create_index(
-        name=index_name,
-        dimension=2,
-        metric="cosine",
-        spec=ServerlessSpec(
-            cloud='aws', 
-            region='us-east-1'
-        ) 
-    ) 
-index = pc.Index(index_name)
-index.upsert(
-    vectors=[
-        {
-            "id": "vec1", 
-            "values": [0.1, 0.1], 
-            "metadata": {"genre": "drama"}
-        }, {
-            "id": "vec2", 
-            "values": [0.2, 0.2], 
-            "metadata": {"genre": "action"}
-        }, {
-            "id": "vec3", 
-            "values": [0.3, 0.3], 
-            "metadata": {"genre": "drama"}
-        }, {
-            "id": "vec4", 
-            "values": [0.4, 0.4,], 
-            "metadata": {"genre": "action"}
-        }
-    ],
-    namespace= "ns1"
-)
-print(index.describe_index_stats())
 def url_to_np_array(url):
     response = requests.get(url)
     response.raise_for_status()
@@ -66,14 +31,14 @@ CORS(app, supports_credentials=True)
 client=OpenAI(api_key=os.getenv('API_KEY'))
 print(client)
 
-messages_db = {
-    12345: [
-        {"id": "msg1", "userId": "user1", "senderName": "Alice", "content": "Hello, how are you?", "timestamp": "2024-08-02T10:15:30Z","role":"user"},
-        {"id": "msg2", "userId": "user2", "senderName": "Bob", "content": "I'm good, thanks! How about you?", "timestamp": "2024-08-02T10:16:00Z","role":"assistant"},
-        {"id": "msg3", "userId": "user1", "senderName": "Alice", "content": "Doing well, just working on some projects.", "timestamp": "2024-08-02T10:17:15Z","role":"user"}
-    ]
-    # Add more chat data as needed
-}
+# messages_db = {
+#     12345: [
+#         {"id": "msg1", "userId": "user1", "senderName": "Alice", "content": "Hello, how are you?", "timestamp": "2024-08-02T10:15:30Z","role":"user"},
+#         {"id": "msg2", "userId": "user2", "senderName": "Bob", "content": "I'm good, thanks! How about you?", "timestamp": "2024-08-02T10:16:00Z","role":"assistant"},
+#         {"id": "msg3", "userId": "user1", "senderName": "Alice", "content": "Doing well, just working on some projects.", "timestamp": "2024-08-02T10:17:15Z","role":"user"}
+#     ]
+#     # Add more chat data as needed
+# }
 
 @app.route('/api/get-messages', methods=['POST'])
 def get_messages():
