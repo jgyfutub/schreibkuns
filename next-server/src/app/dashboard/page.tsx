@@ -1,11 +1,12 @@
+
 import FileUpload from '@/components/FileUploader';
 import { currentUser } from '@clerk/nextjs/server';
 import { auth } from '@clerk/nextjs/server';
 import ChatComponent from '@/components/Chats';
+// import { useLocation , useParams} from 'react-router-dom';
 export default async function DashboardPage() {
   const { userId } = auth();
   const user = await currentUser();
-
   if (!userId || !user) {
     return <div>You are not logged in</div>;
   }
