@@ -142,7 +142,6 @@ def email_entry():
 def email_find():
     data = request.get_json()
     print(data['email'],"sdfgh")
-    # chat_id = data.get('email')
     index = pc.Index('chatpdf-yt')
     res=index.query(
         id=data['email'],
@@ -179,6 +178,16 @@ def add_chat():
         values=arr
     )
     print(arr)
+    index1=pc.Index('chatdatabase')
+    index1.upsert(
+        vectors=[
+            {
+            "id":str(random.randint(1000000000, 9999999999)),
+            "values":[random_number],
+            "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":"Hello How can I help you?" , "timestamp": int(time.time())+10,"role":"assistant"}
+            }
+        ]
+    )
     return jsonify({"message":"sucess"})
 if __name__ == '__main__':
     app.run(debug=True,port=5000)

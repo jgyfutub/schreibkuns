@@ -4,7 +4,14 @@ import { currentUser } from '@clerk/nextjs/server';
 import { auth } from '@clerk/nextjs/server';
 import ChatComponent from '@/components/Chats';
 // import { useLocation , useParams} from 'react-router-dom';
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  console.log(searchParams['id'])
   const { userId } = auth();
   const user = await currentUser();
   if (!userId || !user) {
@@ -28,7 +35,7 @@ export default async function DashboardPage() {
       </ul>
       <div>
       <FileUpload/>
-      <ChatComponent chatId={12345} email={user.emailAddresses[0].emailAddress}/>
+      <ChatComponent chatId={Number(searchParams['id'])} email={user.emailAddresses[0].emailAddress}/>
       </div>
     </div>
   );
