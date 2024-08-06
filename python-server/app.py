@@ -31,14 +31,14 @@ CORS(app, supports_credentials=True)
 client=OpenAI(api_key=os.getenv('API_KEY'))
 print(client)
 
-# messages_db = {
-#     12345: [
-#         {"id": "msg1", "userId": "user1", "senderName": "Alice", "content": "Hello, how are you?", "timestamp": "2024-08-02T10:15:30Z","role":"user"},
-#         {"id": "msg2", "userId": "user2", "senderName": "Bob", "content": "I'm good, thanks! How about you?", "timestamp": "2024-08-02T10:16:00Z","role":"assistant"},
-#         {"id": "msg3", "userId": "user1", "senderName": "Alice", "content": "Doing well, just working on some projects.", "timestamp": "2024-08-02T10:17:15Z","role":"user"}
-#     ]
-#     # Add more chat data as needed
-# }
+messages_db = {
+    12345: [
+        {"id": "msg1", "userId": "user1", "senderName": "Alice", "content": "Hello, how are you?", "timestamp": "2024-08-02T10:15:30Z","role":"user"},
+        {"id": "msg2", "userId": "user2", "senderName": "Bob", "content": "I'm good, thanks! How about you?", "timestamp": "2024-08-02T10:16:00Z","role":"assistant"},
+        {"id": "msg3", "userId": "user1", "senderName": "Alice", "content": "Doing well, just working on some projects.", "timestamp": "2024-08-02T10:17:15Z","role":"user"}
+    ]
+    # Add more chat data as needed
+}
 
 @app.route('/api/get-messages', methods=['POST'])
 def get_messages():
@@ -122,7 +122,7 @@ def chat():
 def email_entry():
     index = pc.Index('chatpdf-yt')
     res=index.query(
-        id="A",
+        id=request.form['email'],
         filter={
         "email": request.form['email'],
     },
@@ -145,7 +145,7 @@ def email_find():
     # chat_id = data.get('email')
     index = pc.Index('chatpdf-yt')
     res=index.query(
-        id="A",
+        id=data['email'],
         filter={
         "email": data['email'],
     },
@@ -154,5 +154,31 @@ def email_find():
     include_values=True)
     arr=res['matches'][0]['values']
     return jsonify({"array":arr})
+
+@app.route('/add_chat', methods=['POST'])
+def add_chat():
+    data = request.get_json()
+    index = pc.Index('chatpdf-yt')
+    print(data['email'],"sdfgh")
+    res=index.query(
+        id=data['email'],
+        filter={
+        "email": data['email'],
+    },
+    top_k=1,
+    include_metadata=True,
+    include_values=True)
+    arr=res['matches'][0]['values']
+    random_number = random.randint(1000000000, 9999999999)
+    for i in range(len(arr)-1):
+        if arr[i]==-1:
+            arr[i]=random_number
+            break
+    index.update(
+        id=data['email'],
+        values=arr
+    )
+    print(arr)
+    return jsonify({"message":"sucess"})
 if __name__ == '__main__':
     app.run(debug=True,port=5000)
