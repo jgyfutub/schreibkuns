@@ -52,7 +52,7 @@ def get_messages():
     for i in index1.query(
          vector=[1],
         include_metadata=True,
-        top_k=1000
+        top_k=10000
     )['matches']:
         if i['id']==str(chat_id):
             m.append(i['metadata'])
@@ -92,25 +92,23 @@ def upload_video():
     
 @app.route('/api/chat', methods=['POST'])
 def chat():
-    print("hello")
     data=request.get_json()
-    print(data['messages'][-1]['content'])
+    print(data['messages'][-1]['content'],data['chatId'])
     index1=pc.Index('chatdatabase')
     index1.upsert(
         vectors=[
             {
-            "id":str(random.randint(1000000000, 9999999999)),
-            "values":[12345],
+            "id":str(data['chatId'])+"ff",
+            "values":[int(data['chatId'])],
             "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": int(time.time()),"role":"user"}
             },
             {
-            "id":str(random.randint(1000000000, 9999999999)),
-            "values":[12345],
+            "id":str(data['chatId']),
+            "values":[int(data['chatId'])],
             "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": int(time.time())+10,"role":"assistant"}
             }
         ]
     )
-    # messages_db[12345].append({"id": "msg3", "userId": "user1", "senderName": "Alice", "content":data[12345][-1]['content'], "timestamp": "2024-08-02T10:17:15Z","role":"user"})
     return jsonify({"chat":"random text"})
 
 @app.route('/email_entry', methods=['POST'])
