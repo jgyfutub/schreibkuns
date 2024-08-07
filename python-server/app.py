@@ -44,24 +44,19 @@ messages_db = {
 def get_messages():
     data = request.get_json()
     chat_id = data.get('chatId')
-    print(data,chat_id)
+    print(chat_id)
     if chat_id is None:
         return jsonify({"error": "chatId is required"}), 400
-    
-    # Retrieve messages for the given chatId
-    messages = messages_db[chat_id]
-    # print(messages_db[chat_id])
     m=[]
     index1 = pc.Index("chatdatabase")
     for i in index1.query(
-        vector=[chat_id],
-        # include_values=True,
+         vector=[1],
         include_metadata=True,
         top_k=1000
     )['matches']:
-        m.append(i['metadata'])
+        if i['id']==str(chat_id):
+            m.append(i['metadata'])
     m=sorted(m, key=lambda x: x['timestamp'])
-    print(m)
     return jsonify({"message":"done","chats":m})
 
 
@@ -168,7 +163,7 @@ def add_chat():
     include_metadata=True,
     include_values=True)
     arr=res['matches'][0]['values']
-    random_number = random.randint(1000000000, 9999999999)
+    random_number = random.randint(100000, 999999)
     for i in range(len(arr)-1):
         if arr[i]==-1:
             arr[i]=random_number
@@ -182,7 +177,7 @@ def add_chat():
     index1.upsert(
         vectors=[
             {
-            "id":str(random.randint(1000000000, 9999999999)),
+            "id":str(random_number),
             "values":[random_number],
             "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":"Hello How can I help you?" , "timestamp": int(time.time())+10,"role":"assistant"}
             }
