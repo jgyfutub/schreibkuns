@@ -11,7 +11,7 @@ import datetime
 import urllib.parse
 from pinecone.grpc import PineconeGRPC as Pinecone
 from pinecone import ServerlessSpec
-import random
+import random,string
 import time
 
 load_dotenv('.env')
@@ -54,7 +54,8 @@ def get_messages():
         include_metadata=True,
         top_k=10000
     )['matches']:
-        if i['id']==str(chat_id):
+        # print(i['id'].split("&&")[0])
+        if i['id'].split("&&")[0]==str(chat_id):
             m.append(i['metadata'])
     m=sorted(m, key=lambda x: x['timestamp'])
     return jsonify({"message":"done","chats":m})
@@ -98,12 +99,12 @@ def chat():
     index1.upsert(
         vectors=[
             {
-            "id":str(data['chatId'])+"ff",
+            "id":str(data['chatId'])+"&&"+''.join(random.choices(string.ascii_letters, k=10)),
             "values":[int(data['chatId'])],
             "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": int(time.time()),"role":"user"}
             },
             {
-            "id":str(data['chatId']),
+            "id":str(data['chatId'])+"&&"+''.join(random.choices(string.ascii_letters, k=10)),
             "values":[int(data['chatId'])],
             "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": int(time.time())+10,"role":"assistant"}
             }
@@ -126,7 +127,7 @@ def email_entry():
     index.upsert(
     vectors=[
     {
-      "id": "A", 
+      "id": request.form['email'], 
       "values": [-1]*1536, 
       "metadata": {"email":request.form['email']}
     },])
@@ -175,7 +176,7 @@ def add_chat():
     index1.upsert(
         vectors=[
             {
-            "id":str(random_number),
+            "id":str(random_number)+"&&"+''.join(random.choices(string.ascii_letters, k=10)),
             "values":[random_number],
             "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":"Hello How can I help you?" , "timestamp": int(time.time())+10,"role":"assistant"}
             }
