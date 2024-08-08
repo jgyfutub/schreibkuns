@@ -5,8 +5,8 @@ import { useDropzone } from "react-dropzone";
 import axios from 'axios'
 import { toast } from "react-hot-toast";
 import { uploadToS3 } from "@/lib/s3";
-
-const FileUpload=()=>{
+type Props = { chatid:String}
+const FileUpload=( {chatid}: Props)=>{
     const [upload,isupload]=useState(false)
     const [result,setresult]=useState("")
     const {getRootProps,getInputProps}=useDropzone({
@@ -25,7 +25,7 @@ const FileUpload=()=>{
             }
            try{
             isupload(true)
-            const data=await uploadToS3(file)
+            const data=await uploadToS3(file,chatid)
             if(!data?.file_key || !data.file_name){
                 alert("Something went wrong")
             }

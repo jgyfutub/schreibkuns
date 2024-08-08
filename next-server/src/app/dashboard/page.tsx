@@ -34,7 +34,7 @@ export default async function DashboardPage({
         </li>
       </ul>
       <div>
-      <FileUpload/>
+      <FileUpload chatid={String(searchParams['id'])}/>
       <ChatComponent chatId={Number(searchParams['id'])} email={user.emailAddresses[0].emailAddress}/>
       </div>
     </div>

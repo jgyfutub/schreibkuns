@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk'
-export async function uploadToS3(file:File){
+export async function uploadToS3(file:File,chatid:String){
     // try{
         AWS.config.update({
             accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,

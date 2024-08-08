@@ -106,7 +106,7 @@ def chat():
             {
             "id":str(data['chatId'])+"&&"+''.join(random.choices(string.ascii_letters, k=10)),
             "values":[int(data['chatId'])],
-            "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": int(time.time())+10,"role":"assistant"}
+            "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": int(time.time())+100,"role":"assistant"}
             }
         ]
     )

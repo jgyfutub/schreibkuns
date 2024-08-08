@@ -15,7 +15,7 @@ const { userId } : { userId: string | null } = auth();
         <div>
           {userId ? (
             <div className='flex gap-4 items-center'>
-              <Link href='/dashboard'>Dashboard</Link>
+              <Link href='/chat'>Chats List</Link>
               <UserButton afterSignOutUrl='/' />
             </div>
           ) : (
