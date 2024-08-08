@@ -1,12 +1,5 @@
 "use client"
 import React, { useState ,useEffect} from "react";
-import { Input } from "./ui/input";
-import { useChat } from "ai/react";
-import { Button } from "./ui/button";
-import { Send } from "lucide-react";
-import MessageList from "./MessageList";
-import { cn } from "@/lib/utils"
-import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Link from 'next/link';
 import { Message } from "ai";

@@ -114,11 +114,12 @@ def chat():
 
 @app.route('/email_entry', methods=['POST'])
 def email_entry():
+    data = request.get_json()
     index = pc.Index('chatpdf-yt')
     res=index.query(
-        id=request.form['email'],
+        id=data['email'],
         filter={
-        "email": request.form['email'],
+        "email": data['email'],
     },
     top_k=1,
     include_metadata=True,
