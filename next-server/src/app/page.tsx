@@ -13,10 +13,14 @@ export default async function Home() {
       <h1>Schreibkuns</h1>
     </div>
   );}
-  // useEffect(() => {
+  try{
   const email=user.emailAddresses[0].emailAddress
-  axios.post('http://127.0.0.1:5000/email_entry', { email })
-  console.log(1)
+  const response2 = await axios.post('http://127.0.0.1:5000/email_entry', { email });
+        const messages2= response2.data;
+  }catch (error) {
+    console.error('There was an error fetching the messages!', error);
+  }
+  // useEffect(() => {
   return (
     <div>
       <h1>text to image online</h1>

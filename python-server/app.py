@@ -124,14 +124,17 @@ def email_entry():
     top_k=1,
     include_metadata=True,
     include_values=True)
-    arr=res['matches'][0]['values']
-    index.upsert(
-    vectors=[
-    {
-      "id": request.form['email'], 
-      "values": [-1]*1536, 
-      "metadata": {"email":request.form['email']}
-    },])
+    if len(res['matches'])!=0:
+        return jsonify({"message":"done"})
+    else:
+        # arr=res['matches'][0]['values']
+        index.upsert(
+        vectors=[
+        {
+        "id": data['email'], 
+        "values": [-1]*1536, 
+        "metadata": {"email":data['email']}
+        },])
     return jsonify({"message":"done"})
 @app.route('/email_find', methods=['POST'])
 def email_find():
