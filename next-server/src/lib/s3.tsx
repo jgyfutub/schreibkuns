@@ -13,7 +13,7 @@ export async function uploadToS3(file:File,chatid:String){
             region:'eu-north-1'
         })
         const file_key='uploads/'+Date.now().toString()+file.name.replace(" ",'-')
-        const file_name=file.name.split(".")[0]+Date.now().toString()+"."+file.name.split(".")[1]
+        const file_name=chatid+"."+file.name.split(".")[1]
         const params={
             Bucket:"chatpdf-ved",
             Key:file_name,
