@@ -37,26 +37,26 @@ export default async function Home() {
 </div>
 <h2 className="text-4xl font-extrabold dark:text-white" style={{textAlign:'center',marginBlock:30}}>Welcome to SchreibKuns!!</h2>
 <p className="mb-3 text-gray-500 dark:text-gray-400 first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100 first-letter:me-3 first-letter:float-start lg:mx-96 md:mx-32 sm:mx-4" >Imagine a world where every picture tells a story, not just in silence but through dynamic conversations. At SchreibKuns, we blend the power of AI with the art of visual storytelling. Simply upload an image, and let our intelligent bot engage you in a meaningful chat based on the content, style, and emotions captured in that image.</p>
-<div className="p-8">
-    <div className="bg-white p-4 rounded-lg shadow-xl py-8 mt-12">
+<div className="p-8 ">
+    <div className=" py-8 mt-12">
         <h4 className="text-4xl font-bold text-gray-800 tracking-widest uppercase text-center">Why Choose SchreibKuns?</h4>
         {/* <p className="text-center text-gray-600 text-sm mt-2">Here are some of the frequently asked questions</p> */}
-        <div className="space-y-12 px-2 xl:px-16 mt-12">
+        <div className="space-y-12 px-2 xl:px-16 mt-12 ">
             <div className="mt-4 flex">
                 <div>
-                    <div className="flex items-center h-16 border-l-4 border-blue-600">
-                        <span className="text-4xl text-blue-600 px-4">Q.</span>
+                    <div className="flex items-center h-16 border-l-4 border-black px-4">
+                        {/* <span className="text-4xl text-black px-4">Q.</span> */}
                     </div>
-                    <div className="flex items-center h-16 border-l-4 border-gray-400">
-                        <span className="text-4xl text-gray-400 px-4">A.</span>
+                    <div className="flex items-center h-16 border-l-4 border-gray-400 px-4">
+                        {/* <span className="text-4xl text-gray-400 px-4">A.</span> */}
                     </div>
                 </div>
                 <div>
                     <div className="flex items-center h-16">
-                        <span className="text-lg text-blue-600 font-bold">Lorem ipsum dolor sit amet?</span>
+                        <span className="text-lg text-black font-bold">Image-Based Conversations</span>
                     </div>
                     <div className="flex items-center py-2">
-                        <span className="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, dignissimos. Neque eos, dignissimos provident reiciendis debitis repudiandae commodi perferendis et itaque, similique fugiat cumque impedit iusto vitae dolorum. Nostrum, fugit!</span>
+                        <span className="text-gray-500">Experience a unique AI interaction where the context is driven by the images you upload.</span>
 
                     </div>
                 </div>
@@ -64,19 +64,19 @@ export default async function Home() {
 
             <div className="mt-4 flex">
                 <div>
-                    <div className="flex items-center h-16 border-l-4 border-blue-600">
-                        <span className="text-4xl text-blue-600 px-4">Q.</span>
+                    <div className="flex items-center h-16 border-l-4 border-black px-4">
+                        {/* <span className="text-4xl text-black px-4">Q.</span> */}
                     </div>
-                    <div className="flex items-center h-16 border-l-4 border-gray-400">
-                        <span className="text-4xl text-gray-400 px-4">A.</span>
+                    <div className="flex items-center h-16 border-l-4 border-gray-400 px-4">
+                        {/* <span className="text-4xl text-gray-400 px-4">A.</span> */}
                     </div>
                 </div>
                 <div>
                     <div className="flex items-center h-16">
-                        <span className="text-lg text-blue-600 font-bold">Consectetur adipisicing elit?</span>
+                        <span className="text-lg text-black font-bold">Tailored Responses</span>
                     </div>
                     <div className="flex items-center py-2">
-                        <span className="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, dignissimos. Neque eos, dignissimos provident reiciendis debitis repudiandae commodi perferendis et itaque, similique fugiat cumque impedit iusto vitae dolorum. Nostrum, fugit!</span>
+                        <span className="text-gray-500">Enjoy customized dialogues, whether your images are artistic, informative, or just for fun.</span>
 
                     </div>
                 </div>
@@ -84,19 +84,19 @@ export default async function Home() {
 
             <div className="mt-4 flex">
                 <div>
-                    <div className="flex items-center h-16 border-l-4 border-blue-600">
-                        <span className="text-4xl text-blue-600 px-4">Q.</span>
+                    <div className="flex items-center h-16 border-l-4 border-black px-4">
+                        {/* <span className="text-4xl text-black px-4">Q.</span> */}
                     </div>
-                    <div className="flex items-center h-16 border-l-4 border-gray-400">
-                        <span className="text-4xl text-gray-400 px-4">A.</span>
+                    <div className="flex items-center h-16 border-l-4 border-gray-400 px-4">
+                        {/* <span className="text-4xl text-gray-400 px-4">A.</span> */}
                     </div>
                 </div>
                 <div>
                     <div className="flex items-center h-16">
-                        <span className="text-lg text-blue-600 font-bold">Neque eos, dignissimos provident reiciendis debitis?</span>
+                        <span className="text-lg text-black font-bold">Intuitive and Easy</span>
                     </div>
                     <div className="flex items-center py-2">
-                        <span className="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, dignissimos. Neque eos, dignissimos provident reiciendis debitis repudiandae commodi perferendis et itaque, similique fugiat cumque impedit iusto vitae dolorum. Nostrum, fugit!</span>
+                        <span className="text-gray-500">Our platform is designed for everyone, from casual users to professionals seeking creative insights.</span>
 
                     </div>
                 </div>
@@ -104,71 +104,77 @@ export default async function Home() {
 
             <div className="mt-4 flex">
                 <div>
-                    <div className="flex items-center h-16 border-l-4 border-blue-600">
-                        <span className="text-4xl text-blue-600 px-4">Q.</span>
+                    <div className="flex items-center h-16 border-l-4 border-black px-4">
+                        {/* <span className="text-4xl text-black px-4">Q.</span> */}
                     </div>
-                    <div className="flex items-center h-16 border-l-4 border-gray-400">
-                        <span className="text-4xl text-gray-400 px-4">A.</span>
+                    <div className="flex items-center h-16 border-l-4 border-gray-400 px-4">
+                        {/* <span className="text-4xl text-gray-400 px-4">A.</span> */}
                     </div>
                 </div>
                 <div>
                     <div className="flex items-center h-16">
-                        <span className="text-lg text-blue-600 font-bold">Repudiandae commodi perferendis et itaque?</span>
+                        <span className="text-lg text-black font-bold">Secure and Private</span>
                     </div>
                     <div className="flex items-center py-2">
-                        <span className="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, dignissimos. Neque eos, dignissimos provident reiciendis debitis repudiandae commodi perferendis et itaque, similique fugiat cumque impedit iusto vitae dolorum. Nostrum, fugit!</span>
+                        <span className="text-gray-500">Your data is safe with us. We prioritize your privacy and security in every interaction.</span>
 
                     </div>
                 </div>
             </div>
 
-            <div className="mt-4 flex">
-                <div>
-                    <div className="flex items-center h-16 border-l-4 border-blue-600">
-                        <span className="text-4xl text-blue-600 px-4">Q.</span>
-                    </div>
-                    <div className="flex items-center h-16 border-l-4 border-gray-400">
-                        <span className="text-4xl text-gray-400 px-4">A.</span>
-                    </div>
-                </div>
-                <div>
-                    <div className="flex items-center h-16">
-                        <span className="text-lg text-blue-600 font-bold">Similique fugiat cumque?</span>
-                    </div>
-                    <div className="flex items-center py-2">
-                        <span className="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, dignissimos. Neque eos, dignissimos provident reiciendis debitis repudiandae commodi perferendis et itaque, similique fugiat cumque impedit iusto vitae dolorum. Nostrum, fugit!</span>
-
-                    </div>
-                </div>
-            </div>
-
-            <div className="mt-4 flex">
-                <div>
-                    <div className="flex items-center h-16 border-l-4 border-blue-600">
-                        <span className="text-4xl text-blue-600 px-4">Q.</span>
-                    </div>
-                    <div className="flex items-center h-16 border-l-4 border-gray-400">
-                        <span className="text-4xl text-gray-400 px-4">A.</span>
-                    </div>
-                </div>
-                <div>
-                    <div className="flex items-center h-16">
-                        <span className="text-lg text-blue-600 font-bold">Impedit iusto vitae dolorum, nostrum fugit?</span>
-                    </div>
-                    <div className="flex items-center py-2">
-                        <span className="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, dignissimos. Neque eos, dignissimos provident reiciendis debitis repudiandae commodi perferendis et itaque, similique fugiat cumque impedit iusto vitae dolorum. Nostrum, fugit!</span>
-
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>
-
-      <h1 className='text-4xl font-bold'>Welcome {user.firstName}</h1>
+<h2 className="text-4xl font-extrabold dark:text-white " >Steps to Follow</h2>
+<div className="flex  items-center justify-center bg-white px-6 md:px-60">
+  <div className="space-y-6 border-l-2 border-dashed">
+    <div className="relative w-full">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-blue-500">
+        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+      </svg>
+      <div className="ml-6">
+        <h4 className="font-bold text-blue-500">Frontend Development.</h4>
+        <p className="mt-2 max-w-screen-sm text-sm text-gray-500">Go to chats page in the heading</p>
+        <span className="mt-1 block text-sm font-semibold text-blue-500">2007</span>
+      </div>
+    </div>
+    <div className="relative w-full">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-blue-500">
+        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+      </svg>
+      <div className="ml-6">
+        <h4 className="font-bold text-blue-500">Graphic Design.</h4>
+        <p className="mt-2 max-w-screen-sm text-sm text-gray-500">Click on Create new chat to create a new chat</p>
+        <span className="mt-1 block text-sm font-semibold text-blue-500">2007</span>
+      </div>
+    </div>
+    <div className="relative w-full">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-blue-500">
+        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+      </svg>
+      <div className="ml-6">
+        <h4 className="font-bold text-blue-500">Lead Ui/Ux Designer.</h4>
+        <p className="mt-2 max-w-screen-sm text-sm text-gray-500">Aliquam tincidunt malesuada tortor vitae iaculis. In eu turpis iaculis, feugiat risus quis, aliquet urna. Quisque fringilla mollis risus, eu pulvinar dolor</p>
+        <span className="mt-1 block text-sm font-semibold text-blue-500">2007</span>
+      </div>
+    </div>
+    <div className="relative w-full">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-blue-500">
+        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+      </svg>
+      <div className="ml-6">
+        <h4 className="font-bold text-blue-500">Lead Ui/Ux Designer.</h4>
+        <p className="mt-2 max-w-screen-sm text-sm text-gray-500">Aliquam tincidunt malesuada tortor vitae iaculis. In eu turpis iaculis, feugiat risus quis, aliquet urna. Quisque fringilla mollis risus, eu pulvinar dolor</p>
+        <span className="mt-1 block text-sm font-semibold text-blue-500">2007</span>
+      </div>
+    </div>
+  </div>
+</div>
+      {/* <h1 className='text-4xl font-bold'>Welcome {user.firstName}</h1>
       <h1 className='text-4xl font-bold'>About the Application</h1>
       <p>SchreibKuns is an innovative application that enables users to interact with a smart AI-powered bot by simply providing an image. The app seamlessly combines advanced image recognition and natural language processing technologies to generate engaging and insightful conversations based on the visual content. Users can upload or take a photo, and the bot will analyze the image to initiate a meaningful dialogue, offering descriptions, stories, or even answering questions related to the image. SchreibKuns is perfect for creative minds, helping to spark imagination and providing unique perspectives on visual content.</p>
-      {/* <p>{messages}</p> */}
+      <p>{messages}</p> */}
     </div>
   )
 }
