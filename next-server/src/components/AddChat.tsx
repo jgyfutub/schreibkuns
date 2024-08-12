@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect } from "react";
 import axios from "axios";
+import { Button } from "./ui/button";
 type Props = { email:String};
 const AddChat=({ email}: Props)=>{
     // useEffect(()=>{
@@ -15,7 +16,9 @@ const handleChat=async ()=>{
 //   handleChat()ß
     // },[email])
     return (
-        <button onClick={handleChat}>Create New Chat+</button>
+      <div style={{display:'flex',justifyContent:'center'}}>
+        <Button onClick={handleChat} className="px-20 my-10">Create New Chat+</Button>
+      </div>
     )
 }
 export default AddChat

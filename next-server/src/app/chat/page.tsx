@@ -11,8 +11,8 @@ export default async function DashboardPage() {
     return <div>You are not logged in</div>;
   }
   return (
-    <div className='mt-10 text-start max-w-xl mx-auto bg-neutral-200 p-5 rounded'>
-      <h1 className='text-4xl font-bold'>Your Chat Lists</h1>
+    <div className='mt-10 text-start max-w-xl mx-auto p-5 rounded'>
+      <h1 className='text-4xl font-bold mb-8 text-center'>Your Chat Lists</h1>
       <ChatComp email={user.emailAddresses[0].emailAddress}/>
       <AddChat email={user.emailAddresses[0].emailAddress}/>
     </div>

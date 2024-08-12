@@ -29,7 +29,7 @@ const ChatComp = ({ email}: Props) => {
     <div className="flex flex-col gap-2 px-4">
       {data.filter(number => number !== -1).map((message1) => {
         return (
-            <Link href={`/dashboard?id=${message1}`}>Chat Id: {message1}</Link>
+            <Link href={`/dashboard?id=${message1}`} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Chat Id: {message1}</Link>
         )})}
         </div>
   );
