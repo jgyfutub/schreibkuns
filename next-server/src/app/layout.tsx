@@ -25,10 +25,12 @@ export default function RootLayout({
   return (
     // </html>
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={inter.className} >
         <ClerkProvider>
           <Header />
+          <div className="flex justify-center mt-20">
           {children}
+          </div>
         </ClerkProvider>
       </body>
     </html>

@@ -19,20 +19,8 @@ export default async function DashboardPage({
   }
 
   return (
-    <div className='mt-10 text-start max-w-xl mx-auto bg-neutral-200 p-5 rounded'>
-      <h1 className='text-4xl font-bold'>Welcome</h1>
-      <ul className='list-none mt-10'>
-        <li className='mb-2'>
-          <span className='font-semibold'>First Name:</span> {user.firstName}
-        </li>
-        <li className='mb-2'>
-          <span className='font-semibold'>Last Name:</span> {user.lastName}
-        </li>
-        <li className='mb-2'>
-          <span className='font-semibold'>Email:</span>{' '}
-          {user.emailAddresses[0].emailAddress}
-        </li>
-      </ul>
+    <div className=' text-start max-w-xl mx-auto p-5 rounded'>
+      <h1 className='text-4xl font-bold text-center mb-10'>Chat Id: {searchParams['id']}</h1>
       <div>
       <FileUpload chatid={String(searchParams['id'])}/>
       <ChatComponent chatId={Number(searchParams['id'])} email={user.emailAddresses[0].emailAddress}/>
