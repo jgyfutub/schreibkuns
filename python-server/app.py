@@ -31,22 +31,29 @@ CORS(app, supports_credentials=True)
 client=OpenAI(api_key=os.getenv('API_KEY'))
 print(client)
 
-messages_db = {
-    12345: [
-        {"id": "msg1", "userId": "user1", "senderName": "Alice", "content": "Hello, how are you?", "timestamp": "2024-08-02T10:15:30Z","role":"user"},
-        {"id": "msg2", "userId": "user2", "senderName": "Bob", "content": "I'm good, thanks! How about you?", "timestamp": "2024-08-02T10:16:00Z","role":"assistant"},
-        {"id": "msg3", "userId": "user1", "senderName": "Alice", "content": "Doing well, just working on some projects.", "timestamp": "2024-08-02T10:17:15Z","role":"user"}
-    ]
-    # Add more chat data as needed
-}
 
 @app.route('/api/get-messages', methods=['POST'])
 def get_messages():
     data = request.get_json()
     chat_id = data.get('chatId')
+    print(data.get('email'))
+    index1 = pc.Index('chatpdf-yt')
+    res=index1.query(
+        id=data.get('email'),
+        filter={
+        "email": data.get('email'),
+    },
+    top_k=1,
+    include_metadata=True,
+    include_values=True)
+    arr=res['matches'][0]['values']
     print(chat_id)
     if chat_id is None:
         return jsonify({"error": "chatId is required"}), 400
+    if data.get('email') is None:
+         return jsonify({"error": "email is required"}), 400
+    if chat_id not in arr:
+         return jsonify({"error": "chatId not in email"}), 400
     m=[]
     index1 = pc.Index("chatdatabase")
     for i in index1.query(

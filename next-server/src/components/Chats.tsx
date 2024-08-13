@@ -18,7 +18,7 @@ const ChatComponent = ({ chatId ,email}: Props) => {
     // Function to fetch messages
     const fetchMessages = async () => {
       try {
-        const response = await axios.post('http://127.0.0.1:5000/api/get-messages', { chatId });
+        const response = await axios.post('http://127.0.0.1:5000/api/get-messages', { chatId ,email});
         const messages = response.data;
         console.log(messages);
         setdata(messages.chats);
@@ -34,6 +34,7 @@ const ChatComponent = ({ chatId ,email}: Props) => {
     // Call the function
     fetchMessages();
   }, [chatId,email]); 
+  const a="hgfds"
   const { input, handleInputChange, handleSubmit, messages } = useChat({
     api: "http://127.0.0.1:5000/api/chat",
     body: {
