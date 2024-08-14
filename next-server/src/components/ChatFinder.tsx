@@ -5,7 +5,15 @@ import Link from 'next/link';
 import { Message } from "ai";
 
 type Props = { email:String};
+function UnixTimeToDateTime(unixTimestamp: number): string{
+  const milliseconds = unixTimestamp * 1000;
+  const dateObject = new Date(milliseconds);
 
+  // You can format the date as needed using methods like:
+  const formattedDate = dateObject.toLocaleString(); // Local format
+
+  return formattedDate;
+}
 const ChatComp = ({ email}: Props) => {
   const [data,setdata]=useState([])
   const [time,settime]=useState([])
@@ -32,7 +40,10 @@ const ChatComp = ({ email}: Props) => {
     <div className="flex flex-col gap-2 px-4">
       {data.filter(number => number !== -1).map((message1,index) => {
         return (
-            <Link href={`/dashboard?id=${message1}`} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Chat Id: {message1} Time:{time[index]}</Link>
+          <div style={{display:'grid',width:320,marginTop:20}}>
+            <span style={{textAlign:'right',fontSize:10}}>{UnixTimeToDateTime(time[index])}</span>
+            <Link href={`/dashboard?id=${message1}`} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Chat Id: {message1} </Link>
+            </div>
         )})}
         </div>
   );
