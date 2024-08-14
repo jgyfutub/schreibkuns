@@ -5,10 +5,11 @@ import { useDropzone } from "react-dropzone";
 import axios from 'axios'
 import { toast } from "react-hot-toast";
 import { uploadToS3 } from "@/lib/s3";
-type Props = { chatid:String}
-const FileUpload=( {chatid}: Props)=>{
+type Props = { chatid:String,email:String}
+const FileUpload=( {chatid,email}: Props)=>{
     const [upload,isupload]=useState(false)
     const [result,setresult]=useState("")
+    // const [filename,setfilename]=useState("")
     const {getRootProps,getInputProps}=useDropzone({
         accept:{'image/jpeg': [],
       'image/png': []},
@@ -29,14 +30,19 @@ const FileUpload=( {chatid}: Props)=>{
             if(!data?.file_key || !data.file_name){
                 alert("Something went wrong")
             }
+            const filename=data.file_name
             const formData = new FormData();
             formData.append('username',data.file_name);
+            // formData.append('email',chatid)d
+            console.log(filename)
             try {
-                const response = await axios.post('http://127.0.0.1:5000/upload_image_url', formData, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                  },
-                });
+                const response = await axios.post('http://127.0.0.1:5000/upload_image_url', {email,chatid,filename}
+                //     formData, {
+                //   headers: {
+                //     'Content-Type': 'multipart/form-data',
+                //   },
+                // }
+            );
                 console.log('Server response:', response.data);
               } catch (error) {
                 console.error('Error submitting the form:', error);
@@ -58,7 +64,7 @@ const FileUpload=( {chatid}: Props)=>{
                     <>
                     <Loader2 className="h-10 w-10 text-blue-500 animate-spin"/>
                     <p className="mmt-2 text-sm text-slate-400">
-                        sending text to gpt my nigga
+                        sending text to the LLM 
                     </p>
                     </>
                 ):(

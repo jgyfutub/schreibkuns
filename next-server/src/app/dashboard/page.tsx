@@ -22,7 +22,7 @@ export default async function DashboardPage({
     <div className=' text-start max-w-xl mx-auto p-5 rounded'>
       <h1 className='text-4xl font-bold text-center mb-10'>Chat Id: {searchParams['id']}</h1>
       <div>
-      <FileUpload chatid={String(searchParams['id'])}/>
+      <FileUpload chatid={String(searchParams['id'])} email={user.emailAddresses[0].emailAddress}/>
       <ChatComponent chatId={Number(searchParams['id'])} email={user.emailAddresses[0].emailAddress}/>
       </div>
     </div>
