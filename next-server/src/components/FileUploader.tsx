@@ -9,7 +9,7 @@ type Props = { chatid:String,email:String}
 const FileUpload=( {chatid,email}: Props)=>{
     const [upload,isupload]=useState(false)
     const [result,setresult]=useState("")
-    // const [filename,setfilename]=useState("")
+    const [filename1,setfilename1]=useState("")
     const {getRootProps,getInputProps}=useDropzone({
         accept:{'image/jpeg': [],
       'image/png': []},
@@ -35,6 +35,7 @@ const FileUpload=( {chatid,email}: Props)=>{
             formData.append('username',data.file_name);
             // formData.append('email',chatid)d
             console.log(filename)
+            setfilename1(filename)
             try {
                 const response = await axios.post('http://127.0.0.1:5000/upload_image_url', {email,chatid,filename}
                 //     formData, {
@@ -55,6 +56,7 @@ const FileUpload=( {chatid,email}: Props)=>{
         }
     })
     return (
+        <div>
         <div className="p-2 bg-white rounded-xl">
             <div {...getRootProps({
                 className:'border-dashed border-2 rounded-xl cursor-pointer bg-gray-50 py-8 flex justify-center items-center flex-col'
@@ -74,6 +76,11 @@ const FileUpload=( {chatid,email}: Props)=>{
                     </>
                 )}
             </div>
+        </div>
+        {filename1 &&
+        <div>
+      <img src={"https://chatpdf-ved.s3.eu-north-1.amazonaws.com/"+filename1} alt="Description of image" style={{ width: '300px', height: 'auto' }} />
+    </div>}
         </div>
     )
 }
