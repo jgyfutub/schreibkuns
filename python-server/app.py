@@ -135,6 +135,14 @@ def email_entry():
         return jsonify({"message":"done"})
     else:
         # arr=res['matches'][0]['values']
+        index1=pc.Index('chat-time')
+        index1.upsert(
+        vectors=[
+        {
+        "id": data['email'], 
+        "values": [-1]*1536, 
+        "metadata": {"email":data['email']}
+        },])
         index.upsert(
         vectors=[
         {
@@ -157,7 +165,18 @@ def email_find():
     include_metadata=True,
     include_values=True)
     arr=res['matches'][0]['values']
-    return jsonify({"array":arr})
+    index1 = pc.Index('chat-time')
+    res1=index1.query(
+        id=data['email'],
+        filter={
+        "email": data['email'],
+    },
+    top_k=1,
+    include_metadata=True,
+    include_values=True)
+    arr1=res1['matches'][0]['values']
+    print(arr1)
+    return jsonify({"array":arr,"time":arr1})
 
 @app.route('/add_chat', methods=['POST'])
 def add_chat():
@@ -182,7 +201,26 @@ def add_chat():
         id=data['email'],
         values=arr
     )
-    print(arr)
+    index2 = pc.Index('chat-time')
+    res2=index2.query(
+        id=data['email'],
+        filter={
+        "email": data['email'],
+    },
+    top_k=1,
+    include_metadata=True,
+    include_values=True)
+    arr2=res2['matches'][0]['values']
+    random_number = random.randint(100000, 999999)
+    for i in range(len(arr2)-1):
+        if arr2[i]==-1:
+            arr2[i]=int(datetime.datetime.now().timestamp())
+            break
+    index2.update(
+        id=data['email'],
+        values=arr2
+    )
+    print(arr,arr2)
     index1=pc.Index('chatdatabase')
     index1.upsert(
         vectors=[
