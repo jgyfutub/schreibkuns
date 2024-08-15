@@ -88,8 +88,8 @@ const FileUpload=( {chatid,email}: Props)=>{
             </div>
         </div>
             ):(
-        <div>
-      <img src={"https://chatpdf-ved.s3.eu-north-1.amazonaws.com/"+filename1} alt="Description of image" style={{ width: '300px', height: 'auto' }} />
+        <div style={{display:'flex',justifyContent:'center',marginRight:50}} >
+      <img  src={"https://chatpdf-ved.s3.eu-north-1.amazonaws.com/"+filename1} alt="Description of image" style={{ width: '300px', height: 'auto' }} />
     </div>)}
         </div>
     )

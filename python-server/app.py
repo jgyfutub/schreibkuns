@@ -265,7 +265,9 @@ def get_image_url():
         include_values=True,
         include_metadata=True
     )
-    print(res['matches'][0]['metadata']['imageurl'])
-    return jsonify({"imageurl":res['matches'][0]['metadata']['imageurl'],"res":data['email']+"&&"+data['chatid']})
+    # print(res['matches'][0]['metadata']['imageurl'])
+    if len(res['matches'])!=0:
+        return jsonify({"imageurl":res['matches'][0]['metadata']['imageurl'],"res":data['email']+"&&"+data['chatid']})
+    return jsonify({"imageurl":"","res":data['email']+"&&"+data['chatid']})
 if __name__ == '__main__':
     app.run(debug=True,port=5000)

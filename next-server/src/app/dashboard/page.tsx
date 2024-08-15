@@ -19,10 +19,12 @@ export default async function DashboardPage({
   }
 
   return (
-    <div className=' text-start max-w-xl mx-auto p-5 rounded'>
+    <div className=' text-start max-w-3xl mx-auto p-5 rounded' style={{width:500,paddingBlock:20}}>
       <h1 className='text-4xl font-bold text-center mb-10'>Chat Id: {searchParams['id']}</h1>
       <div>
+        <div style={{width:500}}>
       <FileUpload chatid={String(searchParams['id'])} email={user.emailAddresses[0].emailAddress}/>
+      </div>
       <ChatComponent chatId={Number(searchParams['id'])} email={user.emailAddresses[0].emailAddress}/>
       </div>
     </div>
