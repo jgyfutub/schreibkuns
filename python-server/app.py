@@ -253,5 +253,19 @@ def add_chat():
         ]
     )
     return jsonify({"message":"sucess"})
+
+@app.route('/get_image_url', methods=['POST'])
+def get_image_url():
+    data=request.get_json()
+    index=pc.Index('chat-image')
+    print(data['email']+"&&"+data['chatid'])
+    res=index.query(
+        id=data['email']+"&&"+data['chatid'],
+        top_k=1,
+        include_values=True,
+        include_metadata=True
+    )
+    print(res['matches'][0]['metadata']['imageurl'])
+    return jsonify({"imageurl":res['matches'][0]['metadata']['imageurl'],"res":data['email']+"&&"+data['chatid']})
 if __name__ == '__main__':
     app.run(debug=True,port=5000)

@@ -14,9 +14,11 @@ const FileUpload=( {chatid,email}: Props)=>{
         const fetchImage=async()=>{
             const image=await axios.post('http://127.0.0.1:5000/get_image_url', {email,chatid})
             // setfilename1()
+            setfilename1(image.data.imageurl)
         }
+        fetchImage()
 
-    })
+    },[email,chatid])
     const {getRootProps,getInputProps}=useDropzone({
         accept:{'image/jpeg': [],
       'image/png': []},
