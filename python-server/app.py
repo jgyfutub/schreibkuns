@@ -232,7 +232,7 @@ def add_chat():
     include_metadata=True,
     include_values=True)
     arr2=res2['matches'][0]['values']
-    random_number = random.randint(100000, 999999)
+    # random_number = random.randint(100000, 999999)
     for i in range(len(arr2)-1):
         if arr2[i]==-1:
             arr2[i]=int(datetime.datetime.now().timestamp())

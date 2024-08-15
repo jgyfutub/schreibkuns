@@ -67,7 +67,7 @@ const FileUpload=( {chatid,email}: Props)=>{
     return (
         <div>
             {filename1=="" ?(
-        <div className="p-2 bg-white rounded-xl">
+        <div className="p-2 bg-white rounded-xl ">
             <div {...getRootProps({
                 className:'border-dashed border-2 rounded-xl cursor-pointer bg-gray-50 py-8 flex justify-center items-center flex-col'
             })}>

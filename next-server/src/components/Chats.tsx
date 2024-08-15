@@ -68,7 +68,7 @@ const ChatComponent = ({ chatId, email }: Props) => {
     >
       {/* header */}
       <div className="sticky top-0 inset-x-0 p-2 bg-white h-fit">
-        {/* <h3 className="text-xl font-bold">Chat</h3> */}
+        <h3 className="text-2xl font-bold text-center">Chats</h3>
       </div>
 
       {/* message list */}
