@@ -2,6 +2,7 @@
 import { currentUser } from '@clerk/nextjs/server';
 import { auth } from '@clerk/nextjs/server';
 import axios from 'axios';
+import { Link } from 'lucide-react';
 export default async function Home() {
   const { userId } = auth();
   const user = await currentUser();
@@ -12,7 +13,7 @@ export default async function Home() {
         <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white mt-4" style={{ textAlign: 'center' }}>SchreibKuns: Transform Your Images into Conversations</h1>
         <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400" style={{ textAlign: 'center' }}>A New Dimension in AI Interaction – Speak with Your Images, Unleash Creativity.</p>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <a href="#_" className="relative inline-block text-lg group ">
+          <a href="/sign-up" className="relative inline-block text-lg group ">
             <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
               <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
               <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
@@ -178,7 +179,7 @@ export default async function Home() {
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white mt-4" style={{ textAlign: 'center' }}>SchreibKuns: Transform Your Images into Conversations</h1>
       <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400" style={{ textAlign: 'center' }}>A New Dimension in AI Interaction – Speak with Your Images, Unleash Creativity.</p>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <a href="#_" className="relative inline-block text-lg group ">
+        <a href="/chat" className="relative inline-block text-lg group ">
           <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
             <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
             <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>

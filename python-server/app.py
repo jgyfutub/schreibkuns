@@ -74,18 +74,6 @@ def upload_video():
     print(data.get('email'),data.get('chatid'),data.get('filename'))
 #https://chatpdf-ved.s3.eu-north-1.amazonaws.com/desktop-wallpaper-war-flag-of-the-german-empire-german-empire1722359696535.jpg
     imageurl="https://"+os.getenv('AWS_SECRET_BUCKET_NAME')+".s3."+os.getenv("NEXT_PUBLIC_AWS_REGION")+".amazonaws.com/"
-    
-    # print(imageurl)
-    # index=pc.Index('chat-image')
-    # res=index.query(
-    #     id=data.get('email')+"&&"+data.get('chatid'),
-    # top_k=1,
-    # include_metadata=True,
-    # include_values=True)
-    # if len(res['matches'])!=0:
-    #     return jsonify({"message":"done"})
-    # else:
-        # arr=res['matches'][0]['values']
     index1=pc.Index('chat-image')
     index1.upsert(
     vectors=[
