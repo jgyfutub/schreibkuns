@@ -185,7 +185,14 @@ def email_find():
     include_values=True)
     arr1=res1['matches'][0]['values']
     print(arr1)
-    return jsonify({"array":arr,"time":arr1})
+    index3=pc.Index('chat-upgrade')
+    res0=index3.query(
+        id=data['email'],
+        include_values=True,
+        top_k=1
+    )
+    print(res0['matches'][0]['values'],data['email'])
+    return jsonify({"array":arr,"time":arr1,"chatlimit":res0['matches'][0]['values'][0]})
 
 @app.route('/add_chat', methods=['POST'])
 def add_chat():

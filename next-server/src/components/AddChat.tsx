@@ -5,19 +5,6 @@ import { Button } from "./ui/button";
 type Props = { email: String };
 const AddChat = ({ email }: Props) => {
   // useEffect(()=>{
-    function convertUnixToDateTime(unixTimestamp: number): string{
-      // Convert the Unix timestamp to milliseconds (Unix timestamp is in seconds)
-      const date = new Date(unixTimestamp * 1000);
-      
-      // Get day, month, year, and time from the Date object
-      const day = date.getDate();
-      const month = date.toLocaleString('default', { month: 'long' });
-      const year = date.getFullYear();
-      const time = date.toLocaleTimeString();
-  
-      // Return the formatted date
-      return `${day} ${month} ${year} ${time}`;
-  }
   const [isClicked, setIsClicked] = useState(false);
   const [data,setdata]=useState([])
   const [warn,setwarn]=useState("")
@@ -27,8 +14,8 @@ const AddChat = ({ email }: Props) => {
       const response1 = await axios.post('http://127.0.0.1:5000/email_find', { email });
       const messages1= response1.data;
       setdata(messages1['array'])
-      console.log(messages1['array'].filter((num:Number) => num === -1).length)
-      if (messages1['array'].filter((num:Number) => num === -1).length<=1535){
+      console.log(messages1['array'].filter((num:Number) => num === -1).length,messages1['chatlimit'])
+      if (messages1['array'].filter((num:Number) => num === -1).length<=messages1['chatlimit']){
         setwarn("warn")
       }}catch(error){
         console.error('Error submitting the form:', error);
