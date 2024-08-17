@@ -19,11 +19,36 @@ const AddChat = ({ email }: Props) => {
       return `${day} ${month} ${year} ${time}`;
   }
   const [isClicked, setIsClicked] = useState(false);
+  const [data,setdata]=useState([])
+  const [warn,setwarn]=useState("")
+  useEffect(()=>{
+    const fetchMessages = async () => {
+      try {
+      const response1 = await axios.post('http://127.0.0.1:5000/email_find', { email });
+      const messages1= response1.data;
+      setdata(messages1['array'])
+      console.log(messages1['array'].filter((num:Number) => num === -1).length)
+      if (messages1['array'].filter((num:Number) => num === -1).length<=1535){
+        setwarn("warn")
+      }}catch(error){
+        console.error('Error submitting the form:', error);
+      }
+    }
+    fetchMessages()
+  },[email])
   const handleChat = async () => {
     setIsClicked(true)
     try {
+      // const response1 = await axios.post('http://127.0.0.1:5000/email_find', { email });
+      // const messages1= response1.data;
+      // setdata(messages1['array'])
+      // console.log(data)
+      // if (data.filter(num => num === -1).length<=1535){
       const response = await axios.post('http://127.0.0.1:5000/add_chat', { email },);
       console.log('Server response:', response.data);
+      // else{
+      //   setwarn("warn")
+      
     } catch (error) {
       console.error('Error submitting the form:', error);
     } finally {
@@ -35,7 +60,9 @@ const AddChat = ({ email }: Props) => {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button onClick={handleChat} className="px-20 my-10">Create New Chat+</Button>
+        {warn=="warn"?<div style={{color:'red',marginTop:20}}> Upgrade for further chats!!!</div>:<Button onClick={handleChat} className="px-20 my-10">Create New Chat+</Button>
+      }
+        {/* <Button onClick={handleChat} className="px-20 my-10">Create New Chat+</Button> */}
 
       </div>
       {isClicked &&

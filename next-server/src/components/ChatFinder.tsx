@@ -17,6 +17,7 @@ function UnixTimeToDateTime(unixTimestamp: number): string{
 const ChatComp = ({ email}: Props) => {
   const [data,setdata]=useState([])
   const [time,settime]=useState([])
+  const [warn,setwarn]=useState("")
   useEffect(() => {
     const fetchMessages = async () => {
       try {
@@ -30,7 +31,12 @@ const ChatComp = ({ email}: Props) => {
         console.error('There was an error fetching the messages!', error);
       }
     };
-    fetchMessages();
+    fetchMessages()
+    // const a
+    const count = data.filter(num => num === -1).length;
+    if (count>=1536){
+      setwarn("warn")
+    }
   }, [email]); 
 
   const handleChat=(e: React.ChangeEvent<any>)=>{
