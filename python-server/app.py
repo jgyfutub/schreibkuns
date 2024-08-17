@@ -159,6 +159,15 @@ def email_entry():
         "values": [-1]*1536, 
         "metadata": {"email":data['email']}
         },])
+        index2=pc.Index('chat-upgrade')
+        index2.upsert(
+            vectors=[
+                {
+                "id": data['email'], 
+                "values": [1531],
+                }
+            ]
+        )
     return jsonify({"message":"done"})
 @app.route('/email_find', methods=['POST'])
 def email_find():
