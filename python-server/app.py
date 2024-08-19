@@ -112,13 +112,6 @@ def chat():
 
     print(data['messages'][-1]['content'],data['chatId'])
     index1=pc.Index('chatdatabase')
-    messages=[]
-    res=index1.query(vector=[data['chatId']],include_values=True,include_metadata=True,top_k=10000)
-    # print(res)
-    for i in res['matches']:
-        if int(i['values'][0])==int(data['chatId']):
-            messages.append({'content':i['metadata']['content'],'role':i['metadata']['role'],'timestamp':i['metadata']['timestamp']})
-    print(messages)
     index1.upsert(
         vectors=[
             {
@@ -133,6 +126,22 @@ def chat():
             }
         ]
     )
+    messages=[]
+    res=index1.query(vector=[data['chatId']],include_values=True,include_metadata=True,top_k=10000)
+    # print(res)
+    for i in res['matches']:
+        if int(i['values'][0])==int(data['chatId']):
+            messages.append({'content':i['metadata']['content'],'role':i['metadata']['role'],'timestamp':i['metadata']['timestamp']})
+    messages_sorted=sorted(messages, key=lambda x: x['timestamp'])
+    for item in messages_sorted:
+        del item['timestamp']
+    print(messages_sorted)
+    # response = client.chat.completions.create(
+    # model="gpt-4o-mini",
+    # messages=messages_sorted,
+    # max_tokens=50,
+    # )
+    # print(response.choices[0])
     return jsonify({"chat":"random text"})
 
 @app.route('/email_entry', methods=['POST'])
