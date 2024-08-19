@@ -82,7 +82,6 @@ def upload_video():
     "values": [-1],
     "metadata": {"imageurl":data.get('filename')}
     },])
-
     # response = client.chat.completions.create(
     # model="gpt-4o-mini",
     # messages=[
@@ -110,8 +109,16 @@ def upload_video():
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data=request.get_json()
+
     print(data['messages'][-1]['content'],data['chatId'])
     index1=pc.Index('chatdatabase')
+    messages=[]
+    res=index1.query(vector=[data['chatId']],include_values=True,include_metadata=True,top_k=10000)
+    # print(res)
+    for i in res['matches']:
+        if int(i['values'][0])==int(data['chatId']):
+            messages.append({'content':i['metadata']['content'],'role':i['metadata']['role'],'timestamp':i['metadata']['timestamp']})
+    print(messages)
     index1.upsert(
         vectors=[
             {
