@@ -109,8 +109,8 @@ def upload_video():
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data=request.get_json()
-
     print(data['messages'][-1]['content'],data['chatId'])
+    index2=pc.index('chat-image')
     index1=pc.Index('chatdatabase')
     index1.upsert(
         vectors=[
@@ -128,13 +128,20 @@ def chat():
     )
     messages=[]
     res=index1.query(vector=[data['chatId']],include_values=True,include_metadata=True,top_k=10000)
-    # print(res)
     for i in res['matches']:
         if int(i['values'][0])==int(data['chatId']):
-            messages.append({'content':i['metadata']['content'],'role':i['metadata']['role'],'timestamp':i['metadata']['timestamp']})
+            messages.append({'content':[{"type":"text","text":i['metadata']['content']}],'role':i['metadata']['role'],'timestamp':i['metadata']['timestamp']})
     messages_sorted=sorted(messages, key=lambda x: x['timestamp'])
     for item in messages_sorted:
         del item['timestamp']
+    messages_sorted.insert(0,{"role": "user",
+      "content": [
+        {"type": "text", "text": "Please respond to the question asked about the image that user gives after this message."},
+        {"type": "image_url", "image_url":{"url": "You are a great image analyst and bot.Please strictly adhere to the image and the chats"}}]})
+    messages_sorted.insert(0,
+        {"role": "system",
+      "content": [
+        {"type": "text", "text": "You are a great image analyst and bot.Please strictly adhere to the image and the chats"}]})
     print(messages_sorted)
     # response = client.chat.completions.create(
     # model="gpt-4o-mini",
