@@ -42,6 +42,7 @@ const ChatComponent = ({ chatId, email }: Props) => {
     api: "http://127.0.0.1:5000/api/chat",
     body: {
       chatId,
+      email
     },
     initialMessages: data || [],
   });

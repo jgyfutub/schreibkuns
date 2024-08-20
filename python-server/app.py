@@ -13,6 +13,7 @@ from pinecone.grpc import PineconeGRPC as Pinecone
 from pinecone import ServerlessSpec
 import random,string
 import time
+import json
 
 load_dotenv('.env')
 pc = Pinecone(api_key=os.getenv('PINECONE_KEY'))
@@ -109,8 +110,10 @@ def upload_video():
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data=request.get_json()
-    print(data['messages'][-1]['content'],data['chatId'])
-    index2=pc.index('chat-image')
+    print(data['messages'][-1]['content'],data['chatId'],data['email'])
+    index2=pc.Index('chat-image')
+    resimage=index2.query(id=data['email']+"&&"+str(data['chatId']),include_metadata=True,top_k=1)
+    print(resimage['matches'][0]['metadata']['imageurl'])
     index1=pc.Index('chatdatabase')
     index1.upsert(
         vectors=[
@@ -118,11 +121,6 @@ def chat():
             "id":str(data['chatId'])+"&&"+''.join(random.choices(string.ascii_letters, k=10)),
             "values":[int(data['chatId'])],
             "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": int(time.time()),"role":"user"}
-            },
-            {
-            "id":str(data['chatId'])+"&&"+''.join(random.choices(string.ascii_letters, k=10)),
-            "values":[int(data['chatId'])],
-            "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content":data['messages'][-1]['content'] , "timestamp": int(time.time())+5,"role":"assistant"}
             }
         ]
     )
@@ -134,21 +132,33 @@ def chat():
     messages_sorted=sorted(messages, key=lambda x: x['timestamp'])
     for item in messages_sorted:
         del item['timestamp']
+    messages_sorted.pop(0)
     messages_sorted.insert(0,{"role": "user",
       "content": [
         {"type": "text", "text": "Please respond to the question asked about the image that user gives after this message."},
-        {"type": "image_url", "image_url":{"url": "You are a great image analyst and bot.Please strictly adhere to the image and the chats"}}]})
+        {"type": "image_url", "image_url":{"url": "https://chatpdf-ved.s3.eu-north-1.amazonaws.com/"+resimage['matches'][0]['metadata']['imageurl']}}
+        ]})
     messages_sorted.insert(0,
         {"role": "system",
       "content": [
         {"type": "text", "text": "You are a great image analyst and bot.Please strictly adhere to the image and the chats"}]})
     print(messages_sorted)
-    # response = client.chat.completions.create(
-    # model="gpt-4o-mini",
-    # messages=messages_sorted,
-    # max_tokens=50,
-    # )
-    # print(response.choices[0])
+    response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=messages_sorted,
+    max_tokens=50,
+    )
+    # json_string = json.dumps(response, indent=4) 
+    index1.upsert(
+        vectors=[
+            {
+            "id":str(data['chatId'])+"&&"+''.join(random.choices(string.ascii_letters, k=10)),
+            "values":[int(data['chatId'])],
+            "metadata":{ "id": "msg3", "userId": "user1","senderName": "Alice", "content": response.choices[0].message.content, "timestamp": int(time.time()),"role":"assistant"}
+            }
+        ]
+    )
+    print(response.choices[0].message.content)
     return jsonify({"chat":"random text"})
 
 @app.route('/email_entry', methods=['POST'])
@@ -187,7 +197,7 @@ def email_entry():
             vectors=[
                 {
                 "id": data['email'], 
-                "values": [1531],
+                "values": [1534],
                 }
             ]
         )
