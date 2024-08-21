@@ -8,6 +8,7 @@ const AddChat = ({ email }: Props) => {
   const [isClicked, setIsClicked] = useState(false);
   const [data,setdata]=useState([])
   const [warn,setwarn]=useState("")
+  const [credit,setcredit]=useState(0)
   useEffect(()=>{
     const fetchMessages = async () => {
       try {
@@ -15,6 +16,7 @@ const AddChat = ({ email }: Props) => {
       const messages1= response1.data;
       setdata(messages1['array'])
       console.log(messages1['array'].filter((num:Number) => num === -1).length,messages1['chatlimit'])
+      setcredit(messages1['array'].filter((num:Number) => num === -1).length-messages1['chatlimit'])
       if (messages1['array'].filter((num:Number) => num === -1).length<=messages1['chatlimit']){
         setwarn("warn")
       }}catch(error){
@@ -60,6 +62,9 @@ const AddChat = ({ email }: Props) => {
           </svg>
           <span className="sr-only">Loading...</span>
         </div>}
+        <div>
+          <p style={{textAlign:'center',fontWeight:'bolder',marginBlock:20}}>Credits remaining : {credit}</p>
+        </div>
     </div>
   )
 }
