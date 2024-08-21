@@ -112,8 +112,12 @@ def chat():
     data=request.get_json()
     print(data['messages'][-1]['content'],data['chatId'],data['email'])
     index2=pc.Index('chat-image')
-    resimage=index2.query(id=data['email']+"&&"+str(data['chatId']),include_metadata=True,top_k=1)
-    print(resimage['matches'][0]['metadata']['imageurl'])
+    resimage=index2.query(id=data['email']+"&&"+str(data['chatId']),include_metadata=True,top_k=10000)
+    image=""
+    for i in resimage['matches']:
+        if i['id']==data['email']+"&&"+str(data['chatId']):
+            image=i['metadata']['imageurl']
+    print(image)
     index1=pc.Index('chatdatabase')
     index1.upsert(
         vectors=[
@@ -136,7 +140,7 @@ def chat():
     messages_sorted.insert(0,{"role": "user",
       "content": [
         {"type": "text", "text": "Please respond to the question asked about the image that user gives after this message."},
-        {"type": "image_url", "image_url":{"url": "https://chatpdf-ved.s3.eu-north-1.amazonaws.com/"+resimage['matches'][0]['metadata']['imageurl']}}
+        {"type": "image_url", "image_url":{"url": "https://chatpdf-ved.s3.eu-north-1.amazonaws.com/"+image}}
         ]})
     messages_sorted.insert(0,
         {"role": "system",
@@ -298,13 +302,18 @@ def get_image_url():
     print(data['email']+"&&"+data['chatid'])
     res=index.query(
         id=data['email']+"&&"+data['chatid'],
-        top_k=1,
+        top_k=10000,
         include_values=True,
         include_metadata=True
     )
     # print(res['matches'][0]['metadata']['imageurl'])
     if len(res['matches'])!=0:
-        return jsonify({"imageurl":res['matches'][0]['metadata']['imageurl'],"res":data['email']+"&&"+data['chatid']})
+        image=""
+        for i in res['matches']:
+            if i['id']==data['email']+"&&"+str(data['chatid']):
+                image=i['metadata']['imageurl']
+        print(image)
+        return jsonify({"imageurl":image,"res":data['email']+"&&"+data['chatid']})
     return jsonify({"imageurl":"","res":data['email']+"&&"+data['chatid']})
 if __name__ == '__main__':
     app.run(debug=True,port=5000)
