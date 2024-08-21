@@ -160,7 +160,7 @@ export default async function Home() {
               </svg>
               <div className="ml-6">
                 <h4 className="font-bold text-black">Step 5</h4>
-                <p className="mt-2 max-w-screen-sm text-sm text-gray-500">Unlock your creativity with 5 free chats! Experience the power of our AI and get started at no cost. Ready for more? Upgrade to our premium plan and keep the conversation going.</p>
+                <p className="mt-2 max-w-screen-sm text-sm text-gray-500">Unlock your creativity with 2 free chats! Experience the power of our AI and get started at no cost. Ready for more? Upgrade to our premium plan and keep the conversation going.</p>
               </div>
             </div>
           </div>
@@ -168,10 +168,7 @@ export default async function Home() {
         <div>
           <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 italic my-12" style={{ textAlign: 'center', marginBottom: 50 }}>Start your journey with SchreibKuns today. Upload an image and see where the conversation takes you!!.</p>
         </div>
-        {/* <h1 className='text-4xl font-bold'>Welcome {user.firstName}</h1>
-      <h1 className='text-4xl font-bold'>About the Application</h1>
-      <p>SchreibKuns is an innovative application that enables users to interact with a smart AI-powered bot by simply providing an image. The app seamlessly combines advanced image recognition and natural language processing technologies to generate engaging and insightful conversations based on the visual content. Users can upload or take a photo, and the bot will analyze the image to initiate a meaningful dialogue, offering descriptions, stories, or even answering questions related to the image. SchreibKuns is perfect for creative minds, helping to spark imagination and providing unique perspectives on visual content.</p>
-      <p>{messages}</p> */}
+        <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 italic my-12" style={{ textAlign: 'center', marginBottom: 50 }}><span style={{color:'black',fontWeight:'bolder',fontSize:30,fontStyle:'normal'}}>Note: </span> Please refer to the <span style={{color:"blue"}}><a href="/pricing">pricing</a></span> to upgrade your plan</p>
       </div>
     );
   }
@@ -335,18 +332,15 @@ export default async function Home() {
               </svg>
               <div className="ml-6">
                 <h4 className="font-bold text-black">Step 5</h4>
-                <p className="mt-2 max-w-screen-sm text-sm text-gray-500">Unlock your creativity with 5 free chats.Need more? Upgrade to our premium plan and keep the conversation going.</p>
+                <p className="mt-2 max-w-screen-sm text-sm text-gray-500">Unlock your creativity with 2 free chats.Need more? Upgrade to our premium plan and keep the conversation going.</p>
               </div>
             </div>
         </div>
       </div>
       <div>
-        <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 italic my-12" style={{ textAlign: 'center', marginBottom: 50 }}>Continue your journey with SchreibKuns today. Upload an image and see where the conversation takes you!!.</p>
+        <p className="text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 italic my-12" style={{ textAlign: 'center', }}>Continue your journey with SchreibKuns today. Upload an image and see where the conversation takes you!!.</p>
       </div>
-      {/* <h1 className='text-4xl font-bold'>Welcome {user.firstName}</h1>
-      <h1 className='text-4xl font-bold'>About the Application</h1>
-      <p>SchreibKuns is an innovative application that enables users to interact with a smart AI-powered bot by simply providing an image. The app seamlessly combines advanced image recognition and natural language processing technologies to generate engaging and insightful conversations based on the visual content. Users can upload or take a photo, and the bot will analyze the image to initiate a meaningful dialogue, offering descriptions, stories, or even answering questions related to the image. SchreibKuns is perfect for creative minds, helping to spark imagination and providing unique perspectives on visual content.</p>
-      <p>{messages}</p> */}
+      <p className="mb-6 text-lg font-normal text-black lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 italic my-12" style={{ textAlign: 'center', marginBottom: 50 }}><span style={{color:'black',fontWeight:'bolder',fontSize:30,fontStyle:'normal'}}>Note:  </span> Please refer to the <span style={{color:"blue"}}><a href="/pricing">pricing</a></span> to upgrade your plan</p>
     </div>
   )
 }
