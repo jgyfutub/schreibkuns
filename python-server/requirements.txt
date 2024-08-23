@@ -9,5 +9,5 @@ Requests==2.32.3
 gunicorn
 google-api-python-client
 protoc_gen_openapiv2
-grpc
+grpcio
 protobuf
