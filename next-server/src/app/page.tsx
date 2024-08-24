@@ -174,7 +174,7 @@ export default async function Home() {
   }
   try {
     const email = user.emailAddresses[0].emailAddress
-    const response2 = await axios.post('http://127.0.0.1:5000/email_entry', { email });
+    const response2 = await axios.post('https://schreibkuns-1.onrender.com/email_entry', { email });
     const messages2 = response2.data;
   } catch (error) {
     console.error('There was an error fetching the messages!', error);
