@@ -20,11 +20,11 @@ const ChatComponent = ({ chatId, email }: Props) => {
     console.log(1)
     const fetchMessages = async () => {
       try {
-        const response = await axios.post('http://127.0.0.1:5000/api/get-messages', { chatId, email });
+        const response = await axios.post('https://schreibkuns-1.onrender.com/api/get-messages', { chatId, email });
         const messages = response.data;
         console.log(messages);
         setdata(messages.chats);
-        const response1 = await axios.post('http://127.0.0.1:5000/email_find', { email });
+        const response1 = await axios.post('https://schreibkuns-1.onrender.com/email_find', { email });
         const messages1 = response1.data;
         console.log(messages1)
         // setdata(messages.chats)
@@ -39,7 +39,7 @@ const ChatComponent = ({ chatId, email }: Props) => {
   console.log(1)
   const a = "hgfds"
   const { input, handleInputChange, handleSubmit, messages, isLoading, stop } = useChat({
-    api: "http://127.0.0.1:5000/api/chat",
+    api: "https://schreibkuns-1.onrender.com/api/chat",
     body: {
       chatId,
       email

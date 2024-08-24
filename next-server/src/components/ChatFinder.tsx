@@ -21,7 +21,7 @@ const ChatComp = ({ email}: Props) => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response1 = await axios.post('http://127.0.0.1:5000/email_find', { email });
+        const response1 = await axios.post('https://schreibkuns-1.onrender.com/email_find', { email });
         const messages1= response1.data;
         console.log(messages1['array'])
         console.log(messages1['time'])

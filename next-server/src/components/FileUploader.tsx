@@ -12,7 +12,7 @@ const FileUpload=( {chatid,email}: Props)=>{
     const [filename1,setfilename1]=useState("")
     useEffect(()=>{
         const fetchImage=async()=>{
-            const image=await axios.post('http://127.0.0.1:5000/get_image_url', {email,chatid})
+            const image=await axios.post('https://schreibkuns-1.onrender.com/get_image_url', {email,chatid})
             // setfilename1()
             setfilename1(image.data.imageurl)
         }
@@ -46,7 +46,7 @@ const FileUpload=( {chatid,email}: Props)=>{
             console.log(filename)
             setfilename1(filename)
             try {
-                const response = await axios.post('http://127.0.0.1:5000/upload_image_url', {email,chatid,filename}
+                const response = await axios.post('https://schreibkuns-1.onrender.com/upload_image_url', {email,chatid,filename}
                 //     formData, {
                 //   headers: {
                 //     'Content-Type': 'multipart/form-data',

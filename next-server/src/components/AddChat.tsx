@@ -12,7 +12,7 @@ const AddChat = ({ email }: Props) => {
   useEffect(()=>{
     const fetchMessages = async () => {
       try {
-      const response1 = await axios.post('http://127.0.0.1:5000/email_find', { email });
+      const response1 = await axios.post('https://schreibkuns-1.onrender.com/email_find', { email });
       const messages1= response1.data;
       setdata(messages1['array'])
       console.log(messages1['array'].filter((num:Number) => num === -1).length,messages1['chatlimit'])
@@ -28,12 +28,12 @@ const AddChat = ({ email }: Props) => {
   const handleChat = async () => {
     setIsClicked(true)
     try {
-      // const response1 = await axios.post('http://127.0.0.1:5000/email_find', { email });
+      // const response1 = await axios.post('https://schreibkuns-1.onrender.com/email_find', { email });
       // const messages1= response1.data;
       // setdata(messages1['array'])
       // console.log(data)
       // if (data.filter(num => num === -1).length<=1535){
-      const response = await axios.post('http://127.0.0.1:5000/add_chat', { email },);
+      const response = await axios.post('https://schreibkuns-1.onrender.com/add_chat', { email },);
       console.log('Server response:', response.data);
       // else{
       //   setwarn("warn")
