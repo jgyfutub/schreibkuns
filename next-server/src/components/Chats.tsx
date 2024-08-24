@@ -32,13 +32,11 @@ const ChatComponent = ({ chatId, email }: Props) => {
         console.error('There was an error fetching the messages!', error);
       }
     };
-
-    // Call the function
     fetchMessages();
   }, [chatId, email]);
   console.log(1)
   const a = "hgfds"
-  const { input, handleInputChange, handleSubmit, messages, isLoading, stop } = useChat({
+  const { input, handleInputChange, handleSubmit, messages, isLoading, stop ,error} = useChat({
     api: "https://schreibkuns-1.onrender.com/api/chat",
     body: {
       chatId,
@@ -46,11 +44,11 @@ const ChatComponent = ({ chatId, email }: Props) => {
     },
     initialMessages: data || [],
   });
+  console.log(error)
+  if(error!=undefined){
+    window.location.reload();
+  }
   console.log(data, messages, 1)
-  // const handleSubmiChat = () => {
-  //   setIsClicked(true);
-  //   handleSubmit();
-  // };
   console.log(isClicked)
   React.useEffect(() => {
     const messageContainer = document.getElementById("message-container");
@@ -73,7 +71,7 @@ const ChatComponent = ({ chatId, email }: Props) => {
       </div>
 
       {/* message list */}
-      <MessageList messages={data} isLoading={false} />
+      <MessageList messages={messages} isLoading={false} />
       <form
         onSubmit={handleSubmit}
         className="sticky bottom-0 inset-x-0 px-2 py-4 bg-white"

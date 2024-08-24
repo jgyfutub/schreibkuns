@@ -42,6 +42,7 @@ const AddChat = ({ email }: Props) => {
       console.error('Error submitting the form:', error);
     } finally {
       setIsClicked(false)
+      window.location.reload();
     }
   }
   //   handleChat()ß
